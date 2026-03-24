@@ -23,8 +23,8 @@
 
 ## 服务访问地址
 
-- **机器人后端 (API)**: `https://anybot-api.onrender.com`
-- **管理后台**: `https://anybot-admin.onrender.com` (默认账号: `admin` / `admin123`)
+- **机器人后端 (API)**: `https://anybot-api.onrender.com` (已配置 `/health` 接口)
+- **管理后台**: `https://anybot-admin.onrender.com` (默认账号: `admin` / `admin123`，已适配 Render 端口)
 
 ## 如何在官网接入机器人
 
