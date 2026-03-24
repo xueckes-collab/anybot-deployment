@@ -24,8 +24,6 @@ services:
     buildCommand: cd chatbot/admin/admin-backend && npm install
     startCommand: cd chatbot/admin/admin-backend && node server.js
     envVars:
-      - key: ADMIN_PORT
-        value: 10000
       - key: JWT_SECRET
         sync: false
       - key: ADMIN_USER

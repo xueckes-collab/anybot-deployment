@@ -60,7 +60,13 @@ async def serve_home():
     index_path = _html_dir / "index.html"
     if index_path.exists():
         return FileResponse(str(index_path), media_type="text/html")
-    return {"message": "Anyway Flooring API", "docs": "/docs"}
+    return {"status": "ok", "message": "Anyway Flooring API", "docs": "/docs"}
+
+
+@app.get("/health")
+async def health_check():
+    """根路径健康检查接口"""
+    return {"status": "ok"}
 
 
 @app.get("/widget/{filename}")

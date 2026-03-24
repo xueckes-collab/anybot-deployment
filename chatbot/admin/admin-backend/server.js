@@ -16,7 +16,7 @@ import { authMiddleware } from './middleware/auth.js';
 import { syncConfigToFile } from './utils/configSync.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PORT = process.env.ADMIN_PORT || 3001;
+const PORT = process.env.PORT || process.env.ADMIN_PORT || 3001;
 
 const app = express();
 app.use(cors());
@@ -71,8 +71,8 @@ if (fs.existsSync(indexHtml)) {
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`Admin backend: http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Admin backend running on port ${PORT}`);
   if (!fs.existsSync(indexHtml)) {
     console.log('提示: 请执行 cd admin-frontend && npm run build');
   }
