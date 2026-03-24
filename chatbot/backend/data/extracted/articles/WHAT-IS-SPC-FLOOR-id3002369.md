@@ -1,0 +1,3 @@
+# WHAT IS SPC FLOOR?
+
+SPC flooring is an upgrade of Luxury Vinyl Tiles (LVT). It is special designed with “Unilin” click locking system. So, it can be easily installed on different floor base. No matter laying them on concrete, ceramic or existing flooring. ECO-FRIENDLY It is Stone plastic composite, so they are formaldehyde free. INDENTATION RESISTANCE WATERPROOF Our SPC Flooring is 100% waterproof, also can be installed in Kitchen & bathroom. STRONG STABILITY Much better than traditional vinyl flooring. VARIETIES OF DESIGNS With thousands of color patterns, include wooden design, stone design & carpets design. Suitable for different use places.

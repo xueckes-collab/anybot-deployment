@@ -1,0 +1,36 @@
+services:
+  # 机器人 API 服务 (Python FastAPI)
+  - type: web
+    name: anybot-api
+    env: python
+    buildCommand: pip install -r chatbot/backend/requirements.txt
+    startCommand: cd chatbot/backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_BASE_URL
+        value: https://api.openai.com/v1
+      - key: OPENAI_MODEL
+        value: gpt-4o
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: CHROMA_PERSIST_DIR
+        value: data/chroma_db
+
+  # 管理后台服务 (Node.js Express)
+  - type: web
+    name: anybot-admin
+    env: node
+    buildCommand: cd chatbot/admin/admin-backend && npm install
+    startCommand: cd chatbot/admin/admin-backend && node server.js
+    envVars:
+      - key: ADMIN_PORT
+        value: 10000
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_USER
+        value: admin
+      - key: ADMIN_PASS
+        value: admin123
+      - key: NODE_VERSION
+        value: 22.13.0

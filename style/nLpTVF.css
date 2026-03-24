@@ -1,0 +1,211 @@
+.ls_change_lang_btn .ls_change_lang_icon > svg {
+  cursor: pointer;
+}
+
+.ls_switch_lang_mark {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 20000;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.ls_switch_lang_mark .ls_switch_lang {
+  width: 60%;
+  min-width: 560px;
+  min-height: 560px;
+  max-width: 980px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.03),
+    0 9px 28px 0 rgba(0, 0, 0, 0.05), 0 6px 16px 0 rgba(0, 0, 0, 0.08);
+  position: absolute;
+  top: 50%;
+  left: 200%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  background-color: #fff;
+}
+
+.ls_switch_lang_mark .ls_switch_lang .ls_switch_lang_title {
+  display: flex;
+  padding: 20px 24px;
+  word-break: break-all;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_title
+  .ls_switch_lang_title_t {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_title
+  .ls_switch_lang_title_close {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ls_switch_lang_mark .ls_switch_lang .ls_switch_lang_main {
+  border-top: 1px solid #e9edf7;
+  padding: 15px 24px;
+  font-size: 14px;
+  line-height: 21px;
+  box-sizing: border-box;
+  height: calc(100% - 61px);
+  overflow: auto;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_main
+  .ls_switch_lang_main_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, calc(100% / 5 - 8px));
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_main
+  .ls_switch_lang_main_list
+  .ls_switch_lang_main_list_cur
+  .ls_switch_lang_main_list_cur_a {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_main
+  .ls_switch_lang_main_list
+  .ls_switch_lang_main_list_cur
+  .ls_switch_lang_main_list_cur_a:hover {
+  text-decoration: underline;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_main
+  .ls_switch_lang_main_list
+  .ls_switch_lang_main_list_cur
+  .ls_switch_lang_main_list_cur_a
+  .ls_list_cur_a_round {
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_main
+  .ls_switch_lang_main_list
+  .ls_switch_lang_main_list_cur
+  .ls_switch_lang_main_list_cur_a
+  .ls_list_cur_a_round
+  + svg {
+  width: 21px;
+  height: 14px;
+  margin-right: 4px;
+  fill: transparent;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_main
+  .ls_switch_lang_main_list
+  .ls_switch_lang_main_list_cur
+  .ls_switch_lang_main_list_cur_a
+  .ls_list_flag {
+  width: 21px;
+  height: 14px;
+  margin-right: 4px;
+}
+
+.ls_switch_lang_mark
+  .ls_switch_lang
+  .ls_switch_lang_main
+  .ls_switch_lang_main_list
+  .ls_switch_lang_main_list_cur
+  .ls_switch_lang_main_list_cur_a
+  .ls_list_cur_a_name {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 22px;
+}
+
+.ls_switch_lang_mark .current_selected {
+  color: #299ee2 !important;
+  text-decoration: revert !important;
+  cursor: default !important;
+}
+
+.ls_switch_lang_mark .current_selected .ls_list_cur_a_round g#pc {
+  fill: #299ee2;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1440px) {
+  .ls_switch_lang_mark .ls_switch_lang {
+    width: 80%;
+  }
+
+  .ls_switch_lang_mark
+    .ls_switch_lang
+    .ls_switch_lang_main
+    .ls_switch_lang_main_list {
+    grid-template-columns: repeat(4, calc(100% / 4 - 8px));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ls_switch_lang_mark {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .ls_switch_lang_mark .ls_switch_lang {
+    width: 100%;
+    height: 100% !important;
+    min-width: 350px;
+    min-height: 560px;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .ls_switch_lang_mark
+    .ls_switch_lang
+    .ls_switch_lang_main
+    .ls_switch_lang_main_list {
+    grid-template-columns: repeat(1, 100%);
+  }
+
+  .ls_switch_lang_mark
+    .ls_switch_lang
+    .ls_switch_lang_main
+    .ls_switch_lang_main_list
+    .ls_switch_lang_main_list_cur
+    .ls_switch_lang_main_list_cur_a {
+    padding: 5px 10px;
+  }
+}

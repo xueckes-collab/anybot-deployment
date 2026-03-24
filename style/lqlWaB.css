@@ -1,0 +1,848 @@
+/* 视频 */
+.windowPlayWrapProd .video-js .vjs-play-progress:before {
+    top: -5px;
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging {
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging>li {
+    display: inline-block
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging>li+li {
+    margin-left: 5px
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging>li>a,
+.sitewidget-bd .paging>li>span {
+    display: inline-block;
+    text-align: center;
+    line-height: 28px;
+    min-width: 28px;
+    font-size: 14px;
+    color: #898989
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging>li>a {
+    text-decoration: none;
+    border: 1px solid #c9caca
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging>li>a:hover {
+    text-decoration: none;
+    border: 1px solid #0079c3;
+    color: #0079c3
+}
+
+.sitewidget-atlasList .atlasList-item .addPriviewVideo{
+    color: #fff;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    content: '';
+    top: 0;
+    left: 0;
+    font-size: 71px;
+    text-align: center;
+    line-height: 177px;
+    z-index: 7 !important;
+
+    cursor: pointer;
+}
+.sitewidget-atlasList .sitewidget-bd .paging>li.active>span {
+    color: #fff;
+    background-color: #0079c3;
+    border: 1px solid #0079c3
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging-wrap.txtc ul.paging {
+    text-align: center
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging-wrap.txtl ul.paging {
+    text-align: left;
+    margin-left: -5px
+}
+
+.sitewidget-atlasList .sitewidget-bd .paging-wrap.txtr ul.paging {
+    text-align: right
+}
+.txtc{
+    display: flex;
+    justify-content: center;
+    margin: 0 2px;
+}
+/* ===========================================================================
+   ====================	 图册列表样式
+ */
+.sitewidget-atlasList .sitewidget-bd>ul {
+    margin:0 -10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; 
+}
+.sitewidget-atlasList .atlasList-item {
+    position: relative;
+    display: table;
+    /* float: left; */
+    padding: 3px;
+    padding-bottom: 46px;
+    width: calc(20% - 10px);
+    min-width: 150px;
+    max-width: 290px;
+    margin-bottom: 5px;
+    margin: auto;
+}
+
+.sitewidget-atlasList li.atlasList-item-list4 {
+     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* float: left; */
+    padding: 5px;
+    /* padding-bottom: 46px; */
+    width: calc(100%/4 - 10px);
+    min-width: 150px;
+    max-width: 290px;
+    margin-bottom: 5px;
+    margin: 0;
+}
+
+
+
+.sitewidget-atlasList li .videoDescbox {
+    
+    display: -webkit-box !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; 
+
+}
+.sitewidget-atlasList li.atlasList-item-list3 {
+   position: relative;
+     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* float: left; */
+    padding: 4px;
+    /* padding-bottom: 46px; */
+    width: calc(100%/4 - 13px);
+    min-width: 150px;
+    max-width: 290px;
+    /* margin-bottom: 5px; */
+    margin: 0 2px;
+}
+
+
+.sitewidget-atlasList li.atlasList-item-list2 {
+    position: relative;
+     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* float: left; */
+    padding: 5px;
+    /* padding-bottom: 46px; */
+    width: calc(100%/3 - 10px);
+    min-width: 150px;
+    max-width: 387px;
+    margin-bottom: 5px;
+    margin: 0;
+}
+
+@media screen and (max-width: 1880px) and (min-width:1200px){
+    .sitewidget-atlasList li.atlasList-item-list4 {
+        max-width: 100%;
+    }
+}
+
+
+@media screen and (min-width:1200px){
+    .sitewidget-atlasList li.atlasList-item-list4 {
+        max-width: 100%;
+    }
+
+    .sitewidget-atlasList li.atlasList-item-list2 {
+        max-width: 100%;
+    }
+}
+
+
+.sitewidget-atlasList .atlasList-item .item-box {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    border: 1px solid #ccc;
+    text-align: center;
+    height: 165px;
+    width: 100%;
+    background-color: white;
+}
+
+.sitewidget-atlasList li.atlasList-item-list2 .item-box {
+    border: 0px solid #ccc;
+}
+
+.sitewidget-atlasList li.atlasList-item-list2 .item-box .item-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 6;
+}
+
+.sitewidget-atlasList li.atlasList-item-list2 .item-box .item-img img {
+    position: absolute;
+    width: 80px;
+    height: 86px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sitewidget-atlasList li.atlasList-item-list2 .item-box {
+    height: 236px;
+}
+
+.sitewidget-atlasList .atlasList-item .item-box .playCircle {
+    color: #fff;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    content: '';
+    top: 0;
+    left: 0;
+    font-size: 71px;
+    text-align: center;
+    line-height: 177px;
+    z-index: 7;
+}
+.sitewidget-atlasList .atlasList-item .item-box .showFlog0 span{
+    height: auto;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-size: 30px;
+    color: #ddd
+}
+.sitewidget-atlasList li.atlasList-item-list2 .item-box .playCircle {
+    background: rgba(0, 0, 0, 0);
+}
+
+.sitewidget-atlasList li.atlasList-item-list2 .item-box {
+    overflow: hidden;
+}
+
+.sitewidget-atlasList li.atlasList-item-list2 .item-box img {
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.sitewidget-atlasList li.atlasList-item-list2 .item-box:hover img.item-srcImg {
+    transform: scale(1.12);
+}
+
+.sitewidget-atlasList .sitewidget-bd .fix:not(.paging-wrap):after{
+    flex: 1 !important;
+}
+
+.sitewidget-atlasList .atlasList-item .item-box .playCircle:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.sitewidget-atlasList .atlasList-item .item-box .showFlog0:before{
+    display: none
+}
+
+.video3-box {
+    width: 32px;
+    height: 22px;
+    background: rgba(0, 0, 0, 0.20);
+    border: 1px solid rgba(255, 255, 255, 0.80);
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.40);
+    border-radius: 12px;
+    position: absolute;
+    bottom: 17px;
+    left: 17px;
+}
+
+.video3-box img {
+    width: 23% !important;
+    position: absolute;
+    left: 14px;
+}
+
+.video3:hover .video3-box {
+    background: rgba(0, 0, 0, 0.60);
+    border: 1px solid rgba(255, 255, 255, 0.80);
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.30);
+    border-radius: 12px;
+}
+
+.sitewidget-atlasList .atlasList-item .item-box img {
+    width: 100%;
+    vertical-align: middle;
+    height: 100%;
+    object-fit: contain                                          ;
+}
+.sitewidget-atlasList .atlasList-item .item-desc {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px 10px;
+    line-height: 34px;
+    height: 34px;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+/*atlas_list_style_1.html样式*/
+.atlas_list_style_1_LiStyle {
+    box-shadow: -1px 0px 5px 1px rgba(19, 19, 19, 0.15);
+    width: 100%;
+    height: 200px;
+    position: relative;
+    z-index: 10;
+}
+
+.sitewidget-atlasList .atlasList-item .item_box_style_1 {
+    border: none;
+    z-index: 10;
+}
+
+.sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+    top: 165px;
+}
+
+.sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+    padding: 15px;
+    width: 22%;
+}
+
+.sitewidget-atlasList .atlasList-item .video-js{
+    max-width: 100%;
+    max-height: 100%;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.atlas_list_style_1_LiStyle_Banner {
+    position: absolute;
+    height: 180px;
+    width: 10px;
+    right: 10px;
+    top: 24px;
+    z-index: 5;
+    transform: rotate(3deg);
+    box-shadow: 2px -1px 5px 1px rgba(19, 19, 19, 0.1);
+}
+
+@media screen and (min-width: 600px) and (max-width:680px){
+    .sitewidget-atlasList li.atlasList-item-list3{
+         width: calc(100%/3 - 12px);
+    }
+    .sitewidget-atlasList li.atlasList-item-list4{
+         width: calc(100%/3 - 10px);
+    }
+}
+
+@media(max-width:1200px) {
+
+    /*atlas_list_style_1.html样式*/
+    .sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+        width: 21.5%;
+    }
+
+    .sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+        top: 150px;
+    }
+
+    .atlas_list_style_1_LiStyle {
+        height: 185px;
+    }
+   
+}
+
+@media (max-width: 800px) {
+    .sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+        width: 21%;
+    }
+
+    .sitewidget-atlasList .atlasList-item .item_box_style_1 {
+        height: 155px;
+    }
+
+    .sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+        top: 130px;
+    }
+
+    .atlas_list_style_1_LiStyle {
+        height: 165px;
+    }
+
+    .atlas_list_style_1_LiStyle_Banner {
+        height: 150px;
+    }
+
+  
+}
+
+
+
+
+@media (max-width: 700px) {
+    .sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+        width: 28%;
+    }
+
+    .sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+        top: 133px;
+    }
+
+   
+}
+
+@media(max-width:639px) {
+    .sitewidget-atlasList .atlasList-item {
+        width: calc(50% - 10px);
+    }
+
+    .sitewidget-atlasList .atlasList-item .item-box {
+        height: 95px;
+    }
+
+   
+}
+
+@media (max-width: 600px) {
+    .sitewidget-atlasList li.atlasList-item-list2 .item-box {
+        height: 138px;
+    }
+
+    .sitewidget-atlasList li.atlasList-item-list2 .item-box .item-img img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+        width: 40%;
+    }
+
+    .sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+        min-width: 140px;
+    }
+
+    .atlas_list_style_1_LiStyle_Banner {
+        height: 150px;
+    }
+
+    .sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+        top: 94px;
+    }
+
+    .atlas_list_style_1_LiStyle {
+        height: 125px;
+    }
+
+    .atlas_list_style_1_LiStyle_Banner {
+        height: 110px;
+        right: 11px;
+    }
+
+    .sitewidget-atlasList li.atlasList-item-list4 {
+        width: calc(100%/2 - 10px);
+    }
+
+    .sitewidget-atlasList li.atlasList-item-list2 {
+        width: calc(100%/2 - 10px);
+    }
+
+    .sitewidget-atlasList li.atlasList-item-list3 {
+        width: calc(100%/2 - 12px);
+    }
+}
+@media (max-width: 340px){
+  .sitewidget-atlasList li.atlasList-item-list4 {
+        width: calc(100% - 10px);
+    }
+}
+
+.videoBoxPlayWrap #cboxContent{
+    background:#000;top:0px!important;
+}
+#cboxTitle{
+    margin:0;top: 0;bottom: unset!important;
+    width: calc(100% - 90px)!important;
+    padding: 0 45px;
+    color: #949494;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.video-js .vjs-big-play-button{
+        transform: translate(0%,0%)!important;
+}
+.atlasList-container.prodlist-fix-fullnum8 .sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-fix-largenum8 .profixlist1180 .atlasList-item,
+.atlasList-container.prodlist-fix-mdnum8 .profixlist960 .atlasList-item,
+.atlasList-container.prodlist-fix-sdnum8 .profixlist740 .atlasList-item,
+.atlasList-container.prodlist-fix-pdnum8 .profixlist480 .atlasList-item {
+  width: calc(12.5% - 12px);
+}
+
+.atlasList-container.prodlist-fix-fullnum7 .sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-fix-largenum7 .profixlist1180 .atlasList-item,
+.atlasList-container.prodlist-fix-mdnum7 .profixlist960 .atlasList-item,
+.atlasList-container.prodlist-fix-sdnum7 .profixlist740 .atlasList-item,
+.atlasList-container.prodlist-fix-pdnum7 .profixlist480 .atlasList-item {
+  width: calc(14.28% - 12px);
+}
+
+.atlasList-container.prodlist-fix-fullnum6 .sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-fix-largenum6 .profixlist1180 .atlasList-item,
+.atlasList-container.prodlist-fix-mdnum6 .profixlist960 .atlasList-item,
+.atlasList-container.prodlist-fix-sdnum6 .profixlist740 .atlasList-item,
+.atlasList-container.prodlist-fix-pdnum6 .profixlist480 .atlasList-item {
+  width: calc(16.66% - 12px);
+}
+
+.atlasList-container.prodlist-fix-fullnum5 .sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-fix-largenum5 .profixlist1180 .atlasList-item,
+.atlasList-container.prodlist-fix-mdnum5 .profixlist960 .atlasList-item,
+.atlasList-container.prodlist-fix-sdnum5 .profixlist740 .atlasList-item,
+.atlasList-container.prodlist-fix-pdnum5 .profixlist480 .atlasList-item {
+  width: calc(20% - 12px);
+}
+
+.atlasList-container.prodlist-fix-fullnum4 .sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-fix-largenum4 .profixlist1180 .atlasList-item,
+.atlasList-container.prodlist-fix-mdnum4 .profixlist960 .atlasList-item,
+.atlasList-container.prodlist-fix-sdnum4 .profixlist740 .atlasList-item,
+.atlasList-container.prodlist-fix-pdnum4 .profixlist480 .atlasList-item {
+  width: calc(25% - 12px);
+}
+
+.atlasList-container.prodlist-fix-fullnum3 .sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-fix-largenum3 .profixlist1180 .atlasList-item,
+.atlasList-container.prodlist-fix-mdnum3 .profixlist960 .atlasList-item,
+.atlasList-container.prodlist-fix-sdnum3 .profixlist740 .atlasList-item,
+.atlasList-container.prodlist-fix-pdnum3 .profixlist480 .atlasList-item {
+  width: calc(33.33% - 12px);
+}
+
+.atlasList-container.prodlist-fix-fullnum2 .sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-fix-largenum2 .profixlist1180 .atlasList-item,
+.atlasList-container.prodlist-fix-mdnum2 .profixlist960 .atlasList-item,
+.atlasList-container.prodlist-fix-sdnum2 .profixlist740 .atlasList-item,
+.atlasList-container.prodlist-fix-pdnum2 .profixlist480 .atlasList-item {
+  width: calc(50% - 12px);
+}
+
+.atlasList-container.prodlist-fix-fullnum1 .sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-fix-largenum1 .profixlist1180 .atlasList-item,
+.atlasList-container.prodlist-fix-mdnum1 .profixlist960 .atlasList-item,
+.atlasList-container.prodlist-fix-sdnum1 .profixlist740 .atlasList-item,
+.atlasList-container.prodlist-fix-pdnum1 .profixlist480 .atlasList-item {
+  width: 100%;
+}
+.atlasList-container.prodlist-galleryDesktopNum-single ul .atlasList-item,
+.atlasList-container.prodlist-galleryDesktopSmallNum-single .profixlist1180.sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-galleryTabletNum-single .profixlist960.sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-galleryTabletSmallNum-single .profixlist740.sitewidget-atlasList .atlasList-item,
+.atlasList-container.prodlist-galleryMobileNum-single .profixlist480.sitewidget-atlasList .atlasList-item {
+  width: 100%;
+}
+
+/* 关联产品视频弹窗样式 */
+
+.windowPlayWrapProd *{
+    box-sizing:border-box;
+}
+.windowPlayWrapProd #cboxContent {
+    border-radius:12px;
+    background-color:#ffffff !important;
+}
+.windowPlayWrapProd .contentBox {
+    display:flex;
+    width:100%;
+    height:100%;
+    padding: 28px 34px 33px 29px;
+    box-sizing: border-box;
+}
+.windowPlayWrapProd .prodDiv,
+.windowPlayWrapProd .videoDiv{
+    position:relative;
+    width:50%;
+    height:100%;
+}
+.windowPlayWrapProd .prodDiv{
+    padding-left:60px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.windowPlayWrapProd .prodDiv .prod-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333333;
+    display: -webkit-box !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; 
+    width: 100%;
+}
+.windowPlayWrapProd .prodDiv .prod-list {
+    margin-top: 29px;
+    max-height: 100%;
+    overflow-y: auto;
+    flex: 1;
+}
+.windowPlayWrapProd .prodDiv .prod-desc {
+    margin-top:14px;
+    max-height:111px;
+    overflow: auto;
+    overflow-x: hidden;
+    word-break: break-word;
+}
+/* 修改滚动条的宽度和高度 */
+.windowPlayWrapProd .prodDiv .prod-desc::-webkit-scrollbar,
+.windowPlayWrapProd .prodDiv .prod-list::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background-color: transparent;
+}
+
+/* 滚动条背景色 */
+.windowPlayWrapProd .prodDiv .prod-desc::-webkit-scrollbar-track,
+.windowPlayWrapProd .prodDiv .prod-list::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* 滚动条滑块样式 */
+.windowPlayWrapProd .prodDiv .prod-desc::-webkit-scrollbar-thumb, 
+.windowPlayWrapProd .prodDiv .prod-list::-webkit-scrollbar-thumb {
+    background-color: #969696;;
+    border-radius: 4px;
+    border: none;
+}
+
+.windowPlayWrapProd .prodDiv .prod-list li{
+    display:flex;
+    margin-bottom:20px;
+    
+}
+.windowPlayWrapProd .prodDiv .prod-list li:last-child{
+    margin-bottom:0;
+}
+.windowPlayWrapProd .prodDiv .prod-list .left{
+    margin-right:18px;
+}
+.windowPlayWrapProd .prodDiv .prod-list .right{
+    padding-right:39px;
+}
+.windowPlayWrapProd .prodDiv .prod-list .right h2{
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+    line-height: 18px;
+    display: -webkit-box !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; 
+
+}
+.windowPlayWrapProd .prodDiv .prod-list .right .price{
+    display:flex;
+    margin-top:8px;
+}
+.windowPlayWrapProd .prodDiv .prod-list .right .price .currentPrice{
+    display:flex;
+    margin-right:10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #D0021B;
+    line-height: 20px;
+}
+.windowPlayWrapProd .prodDiv .prod-list .right .price .originalPrice{
+    display: flex;
+    align-items: flex-end;
+    font-size: 13px;
+    font-weight: 400;
+    color: #BFBFBF;
+    line-height: 19px;
+    text-decoration: line-through;
+}
+.windowPlayWrapProd .prodDiv .prod-list .right .price .currencySymbol {
+    margin-right: 5px;
+}
+.windowPlayWrapProd .prodDiv .prod-list .right .buy a{
+    display:inline-flex;
+    align-items: center;
+    padding: 0 30px;
+    margin-top:12px;
+    height: 24px;
+    background: #333333;
+    border-radius: 12px;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 14px;
+}
+.windowPlayWrapProd .vjs-slider-horizontal .vjs-volume-level:before {
+    top: -4px !important;
+}
+.windowPlayWrapProd .prodDiv .prod-list .left {
+    display: flex;
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+}
+.windowPlayWrapProd .prodDiv .prod-list li img{
+    display:flex;
+    width:100%;
+    height:100%;
+    object-fit: contain;
+}
+/* .windowPlayWrapProd #cboxClose {
+    display:none;
+} */
+.windowPlayWrapProd #cboxWrapper #cboxClose {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB0PSIxNjg5MDYzMTc1NDM2IiBjbGFzcz0iYmxvY2tfMjcwMDRfdmlkZW9fZGV0YWlsX2NvbnRlbnRfY2xvc2VfaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjIyNzYiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZD0iTTU3MS43MzMzMzMgNTEybDI2OC44LTI2OC44YzE3LjA2NjY2Ny0xNy4wNjY2NjcgMTcuMDY2NjY3LTQyLjY2NjY2NyAwLTU5LjczMzMzMy0xNy4wNjY2NjctMTcuMDY2NjY3LTQyLjY2NjY2Ny0xNy4wNjY2NjctNTkuNzMzMzMzIDBMNTEyIDQ1Mi4yNjY2NjcgMjQzLjIgMTgzLjQ2NjY2N2MtMTcuMDY2NjY3LTE3LjA2NjY2Ny00Mi42NjY2NjctMTcuMDY2NjY3LTU5LjczMzMzMyAwLTE3LjA2NjY2NyAxNy4wNjY2NjctMTcuMDY2NjY3IDQyLjY2NjY2NyAwIDU5LjczMzMzM0w0NTIuMjY2NjY3IDUxMiAxODMuNDY2NjY3IDc4MC44Yy0xNy4wNjY2NjcgMTcuMDY2NjY3LTE3LjA2NjY2NyA0Mi42NjY2NjcgMCA1OS43MzMzMzMgOC41MzMzMzMgOC41MzMzMzMgMTkuMiAxMi44IDI5Ljg2NjY2NiAxMi44czIxLjMzMzMzMy00LjI2NjY2NyAyOS44NjY2NjctMTIuOEw1MTIgNTcxLjczMzMzM2wyNjguOCAyNjguOGM4LjUzMzMzMyA4LjUzMzMzMyAxOS4yIDEyLjggMjkuODY2NjY3IDEyLjhzMjEuMzMzMzMzLTQuMjY2NjY3IDI5Ljg2NjY2Ni0xMi44YzE3LjA2NjY2Ny0xNy4wNjY2NjcgMTcuMDY2NjY3LTQyLjY2NjY2NyAwLTU5LjczMzMzM0w1NzEuNzMzMzMzIDUxMnoiIGZpbGw9IiM2NjY2NjYiIHAtaWQ9IjIyNzciPjwvcGF0aD48L3N2Zz4=') !important;
+    top: 10px !important;
+    right: 10px;
+}
+.windowPlayWrapProd #cboxTitle{
+    display:none !important;
+}
+.windowPlayWrapProd #cboxLoadedContent{
+    margin-bottom:0;
+    margin-top: 0 !important;
+}  
+.windowPlayWrapProd .videoDiv iframe,
+    .windowPlayWrapProd .videoDiv>div{
+        background: #e4e4e4e4;
+    }
+
+.windowPlayWrapProd .hide{
+    display: none !important;
+}    
+@media screen and (max-width: 1240px) {
+    .windowPlayWrapProd #cboxWrapper{
+        left: 50%;
+        top: 50%;
+        transform: translate3D(-50%,-50%, 0);
+        max-width:calc(100% - 40px);
+        
+    }
+    
+    .windowPlayWrapProd #cboxContent,
+    .windowPlayWrapProd #cboxLoadedContent{
+        max-width:100%;
+    }
+}
+@media screen and (max-width: 990px) {
+    .windowPlayWrapProd .contentBox {
+        display:block;
+        padding: 20px;
+    }
+    .windowPlayWrapProd #cboxWrapper #cboxClose{
+        top: 20px !important;
+        right: 20px;
+    }
+    .windowPlayWrapProd .prodDiv .prod-list {
+        max-height: 220px
+    }
+    .windowPlayWrapProd .prodDiv .prod-desc{
+        max-height:unset;
+    }
+    .windowPlayWrapProd #cboxWrapper,
+    .windowPlayWrapProd #cboxContent,
+    .windowPlayWrapProd #cboxLoadedContent{
+        max-height:82vh ;
+        height:auto !important;
+    }
+        .windowPlayWrapProd #cboxContent{
+        width: calc(100vw - 40px) !important;
+    }
+    .windowPlayWrapProd{
+        overflow:unset !important;
+    }
+    .windowPlayWrapProd .prodDiv, .windowPlayWrapProd .videoDiv{
+        width:100%;
+    }
+    .windowPlayWrapProd .prodDiv{
+            height:auto;
+            padding-left:0;
+            padding-bottom:20px;
+    }
+    .windowPlayWrapProd .videoDiv{
+        position: relative;
+        padding-top: 72%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    .windowPlayWrapProd .videoDiv iframe,
+    .windowPlayWrapProd .videoDiv>div{
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+
+    }
+
+    
+}
+
+@media screen and (max-width: 768px) {
+    .windowPlayWrapProd .contentBox {
+        display:block;
+        padding: 12px;
+        padding-bottom:0;
+    }
+    .windowPlayWrapProd #cboxWrapper #cboxClose{
+        top: 12px !important;
+        right: 12px;
+    }
+    .windowPlayWrapProd #cboxWrapper {
+        max-width:calc(100% - 40px);
+    }
+    .windowPlayWrapProd .prodDiv .prod-desc {
+        margin-top:7px;
+    }
+    .windowPlayWrapProd .prodDiv .prod-title{
+        font-size:16px;
+    }
+    .windowPlayWrapProd .prodDiv .prod-list{
+        margin-top:12px;
+    }
+}
+@media screen and (max-width: 500px) {
+        .windowPlayWrapProd .prodDiv .prod-list .right{
+            padding-right:8px;
+        }
+        
+}

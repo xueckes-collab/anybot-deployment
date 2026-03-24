@@ -1,0 +1,8 @@
+.sitewidget-pictureNew img{vertical-align:middle}
+.sitewidget-pictureNew .sitewidget-bd .picture-wrap{line-height:0}
+.sitewidget-pictureNew .sitewidget-bd .picture-description{line-height:1.6em}
+.sitewidget-pictureNew .picture-resized .mobile-imgBox img{height:100%;max-width:inherit}
+.sitewidget-pictureNew .mobile-imgBox img{position:relative;max-width:100%}
+.pic-style-circle,.pic-style-circle img{border-radius:50%}
+.pic-style-corner,.pic-style-corner img{border-radius:20px}
+.pic-style-album>a{background:#fff;padding:7px;border:1px solid #ccc;border-radius:4px}

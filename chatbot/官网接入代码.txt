@@ -1,0 +1,5 @@
+将下面这行代码，粘贴到官网每个页面的 </body> 标签之前。
+把 https://你的后端地址.com 替换成你实际部署的机器人 API 地址。
+
+<!-- Anyway Flooring Chatbot -->
+<script src="https://你的后端地址.com/widget/chatbot-widget.js" data-api-url="https://你的后端地址.com" defer></script>

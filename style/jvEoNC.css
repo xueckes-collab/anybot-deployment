@@ -1,0 +1,29 @@
+.row .sitewidget-advancedSlider div{direction:ltr !important}
+.sitewidget-advancedSlider a.asl-btn{display:inline-block;text-decoration:none;font-size:14px}
+.sitewidget-advancedSlider a.asl-btn:hover{-webkit-transition:all .5s ease-out !important;-moz-transition:all .5s ease-out !important;-ms-transition:all .5s ease-out !important;-o-transition:all .5s ease-out !important;transition:all .5s ease-out !important}
+.sitewidget-advancedSlider a.asl-btn-outline-dark{height:44px;line-height:44px;padding:0 30px;color:#333;background-color:transparent;border:2px solid #333;border-radius:2px}
+.sitewidget-advancedSlider a.asl-btn-outline-dark:hover{color:#fff;background-color:#333}
+.sitewidget-advancedSlider a.asl-btn-outline-light{height:44px;line-height:44px;padding:0 30px;color:#fff;background-color:transparent;border:2px solid #fff;border-radius:2px}
+.sitewidget-advancedSlider a.asl-btn-outline-light:hover{background-color:#fff;color:#333}
+.sitewidget-advancedSlider a.asl-btn-bgcolor{height:48px;line-height:48px;padding:0 32px;color:#fff;background-color:#ea6060;border-radius:2px}
+.sitewidget-advancedSlider a.asl-btn-bgcolor:hover{opacity:.8 !important}
+.sitewidget-advancedSlider a.asl-btn-defined{padding:0;border-radius:2px}
+.sitewidget-advancedSlider a.asl-btn-underline{color:#1686cc;text-decoration:underline}
+.sitewidget-advancedSlider a.asl-btn-underline:hover{opacity:.8 !important}
+.sitewidget-advancedSlider a.asl-btn-common{color:#1686cc}
+.sitewidget-advancedSlider a.asl-btn-common:hover{opacity:.8 !important;text-decoration:underline}
+.sitewidget-advancedSlider .ls-l.asl-txt span{font-size:inherit;line-height:1.5em}
+@media(max-width:640px){.sitewidget-advancedSlider a.asl-btn{display:none}
+}
+@media(min-width:1220px){.sitewidget-advancedSlider .terminal-wrapper{display:block}
+.sitewidget-advancedSlider .terminal-wrapper-pad{display:none}
+.sitewidget-advancedSlider .terminal-wrapper-phone{display:none}
+}
+@media(min-width:768px) and (max-width:1219px){.sitewidget-advancedSlider .styleBox.hasPad .terminal-wrapper{display:none}
+.sitewidget-advancedSlider .styleBox.hasPad .terminal-wrapper-pad{display:block}
+.sitewidget-advancedSlider .styleBox .terminal-wrapper-phone{display:none}
+}
+@media(max-width:767px){.sitewidget-advancedSlider .styleBox.hasPhone .terminal-wrapper{display:none}
+.sitewidget-advancedSlider .styleBox.hasPhone .terminal-wrapper-phone{display:block}
+.sitewidget-advancedSlider .terminal-wrapper-pad{display:none}
+}

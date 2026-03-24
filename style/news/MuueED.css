@@ -1,0 +1,70 @@
+.follow-a{display:inline-block;margin:1px;text-align:center !important}
+.share-a{display:inline-block;margin:1px;text-align:center !important}
+.follow-a:hover .planeRotate,.share-a:hover .planeRotate{transform:rotate(360deg);-ms-transform:rotate(360deg);-moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);-o-transform:rotate(360deg);transition:transform 1s;-moz-transition:transform 1s;-webkit-transition:transform 1s;-o-transition:transform 1s}
+.follow-a:hover .xRotate,.share-a:hover .xRotate{transform:rotateX(360deg);-ms-transform:rotateX(360deg);-moz-transform:rotateX(360deg);-webkit-transform:rotateX(360deg);-o-transform:rotateX(360deg);transition:transform 1s;-moz-transition:transform 1s;-webkit-transition:transform 1s;-o-transition:transform 1s}
+.follow-a:hover .yRotate,.share-a:hover .yRotate{transform:rotateY(360deg);-ms-transform:rotateY(360deg);-moz-transform:rotateY(360deg);-webkit-transform:rotateY(360deg);-o-transform:rotateY(360deg);transition:transform 1s;-moz-transition:transform 1s;-webkit-transition:transform 1s;-o-transition:transform 1s}
+.follow-a:hover .upRotate,.share-a:hover .upRotate{-webkit-transform:translateY(-6px);transform:translateY(-6px)}
+.social-icon-round{border-radius:50%}
+.social-icon-corner{border-radius:10%}
+.social-icon-hori{margin-right:8px}
+.social-icon-vert{margin-bottom:4px}
+.social-follow-hori-text{display:inline-block;text-align:left;width:5em;vertical-align:middle}
+.social-follow-vert-text{display:inline-block;text-align:center;width:5em;vertical-align:middle}
+.social-icon-greycolor,.social-icon-blackgrey,.social-icon-default{-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-ms-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
+.social-icon-default:hover{opacity:.8;filter:alpha(opacity=80)}
+.sitewidget-bd .social-icon-24.social-icon-greycolor,.sitewidget-bd .social-icon-32.social-icon-greycolor,.sitewidget-bd .social-icon-48.social-icon-greycolor,.sitewidget-bd .social-icon-64.social-icon-greycolor{background-color:#9ea3a7}
+.social-icon-greycolor.social-icon-facebook:hover{background-color:#3b5998}
+.social-icon-greycolor.social-icon-googleplus:hover{background-color:#d14836}
+.social-icon-greycolor.social-icon-linkedin:hover{background-color:#007fb1}
+.social-icon-greycolor.social-icon-sinaweibo:hover{background-color:#e6162d}
+.social-icon-greycolor.social-icon-twitter:hover{background-color:#000}
+.social-icon-greycolor.social-icon-youtube:hover{background-color:#cd332d}
+.social-icon-greycolor.social-icon-tweibo:hover{background-color:#4cb4e6}
+.social-icon-greycolor.social-icon-qzone:hover{background-color:#ffc028}
+.social-icon-greycolor.social-icon-renren:hover{background-color:#005baa}
+.social-icon-greycolor.social-icon-douban:hover{background-color:#228a31}
+.social-icon-greycolor.social-icon-instagram:hover{background-color:#f32c7f}
+.social-icon-greycolor.social-icon-wechat:hover{background-color:#8dc61f}
+.social-icon-greycolor.social-icon-pinterest:hover{background-color:#bd081c}
+.social-icon-greycolor.social-icon-youku:hover{background-color:#ff3b3b}
+.social-icon-greycolor.social-icon-tumblr:hover{background-color:#ff3b3b}
+.social-icon-greycolor.social-icon-vk:hover{background-color:#ff3b3b}
+.social-icon-greycolor.social-icon-tiktok:hover{background-color:#000}
+.social-icon-greycolor.social-icon-blogger:hover{background-color:#f4933f}
+.social-icon-greycolor.social-icon-china:hover{background-color:#da291c}
+.social-icon-greycolor.social-icon-redbook:hover{background-color:#ff2840}
+.social-icon-greycolor.social-icon-weiVideo:hover{background-color:#ff8904}
+.social-icon-greycolor.social-icon-douyin:hover{background-color:#000}
+.social-icon-greycolor.social-icon-whatsapp:hover{background-color:#49c42d}
+.social-icon-greycolor.social-icon-toutiao:hover{background-color:#f54243}
+.social-icon-greycolor.social-icon-baijiahao:hover{background-color:#3a56d4}
+.social-icon-greycolor.social-icon-kakaotalk:hover{background-color:#ffe100}
+.social-icon-greycolor.social-icon-snapchat:hover{background-color:#f8f50a}
+.social-icon-greycolor.social-icon-bluesky:hover{background-color:#0085ff}
+.social-icon-greycolor.social-icon-line:hover{background-color:#00c300}
+.social-icon-greycolor.social-icon-alibaba:hover{background-color:#fd6b16}
+.social-icon-greycolor.social-icon-madeinchina:hover{background-color:#da291c}
+.sitewidget-bd .social-icon-24.social-icon-blackgrey,.sitewidget-bd .social-icon-32.social-icon-blackgrey,.sitewidget-bd .social-icon-48.social-icon-blackgrey,.sitewidget-bd .social-icon-64.social-icon-blackgrey{background-color:#000}
+.social-icon-24.social-icon-blackgrey:hover,.social-icon-32.social-icon-blackgrey:hover,.social-icon-48.social-icon-blackgrey:hover,.social-icon-64.social-icon-blackgrey:hover{background-color:#aaa}
+.social-icon-alone-default:hover{opacity:.8;filter:alpha(opacity=80)}
+.social-icon-ring-default:hover{opacity:.8;filter:alpha(opacity=80)}
+@media(min-width:768px){.sitewidget-follow.icons-float-left,.sitewidget-share.icons-float-left{position:fixed;left:0;top:30%;z-index:99}
+.sitewidget-follow.icons-float-right,.sitewidget-share.icons-float-right{position:fixed;right:0;top:30%;z-index:99;left:auto}
+.sitewidget-follow.icons-float-left .follow-a,.sitewidget-share.icons-float-left .share-a{display:block}
+.sitewidget-follow.icons-float-left .follow-a+.follow-a,.sitewidget-share.icons-float-left .share-a+.share-a{margin-top:5px}
+}
+.hasCode,.hasLink{position:relative}
+.icons-float-left .hasCode .social-follow-hori-text{white-space:nowrap}
+.codeWrap{display:none;padding:12px;border:1px solid #d6d6d6;border-radius:2px;position:absolute;background:#fff;z-index:1000;filter:drop-shadow(0 0 2px #b6b6b6)}
+.codeWrap>.weiboLink{display:block}
+.codeWrap>.triangle{display:block;position:absolute;width:20px;height:10px}
+.codeWrap>.triangle.float_left{width:10px;height:20px;top:50%;margin-top:-10px;left:-9px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAEPSURBVHjarNKxSsRAEAbgf8/kBRLsJJA0PsFib6Fgo1jaiQ+hpQ8iPsC19rZCdhNIZ5EirOQgISQSWciBOjZJuDuzdxb+sN0HMzszjIjwh9BslxBCPALAbAc6AHC9FQohDgG8eJ4HAGBTPUopjwA8+b6/77pu3yXR2gvD8FhK+d40Da1mE51HUbRs25Y2s4pu4jj+1FrTVAZ0myTJd9d1ZMj4a8eyLGbbtnFUA7zTWj+kaQrTpsbxCCH2AMwdx7kMggCMsTU3Dpxz/gXgqq7rZ6WUsfSAlwAuyrIUeZ6bYY8/AJwtFovXoijMsMcVgBOllKqqCluPgnP+BuA0yzIAoF+7nljrPRER+7cLH/IzAH1v+l/VOXxUAAAAAElFTkSuQmCC) no-repeat center;border-right:2px solid #fff}
+.codeWrap>.triangle.float_right{width:10px;height:20px;top:50%;margin-top:-10px;right:-9px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAUCAYAAAC07qxWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEJSURBVDhPlZE9aoQAEIUNKVKlS5nUuzdInwvkEDlE2rQ5Q2APIOwR0ln4h9jIolgYYiFRMAiCgehknvvYZVFD8oHgzHw8B8cQxfgL/xIdx3liuQxEz/PE9/01W8uUZYnUN9d1b9iaB6lFUUDeafIV21MggjzPIbuWZV1ydAq9kSzLRFd4TZLkguMjdEaGYZA0TZG8NU3znMoeOgcgx3GM5Bctz6hNRdD3vURRBPmZ2rzYdZ2EYTjoCo+LUtu2EgTBt23bD6MEODvQNA2u9KXXuqeyh/ORuq4hfWrSHcdH6EhVVVj8Q5NuOToFEs6n0rs+K7anQFRB9HPXbM0DUX/BhuUyEPn6C4bxAzCVSYkKx9uEAAAAAElFTkSuQmCC) center center no-repeat}
+.codeWrap>.triangle.open_top{left:50%;margin-left:-10px;top:-9px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAETSURBVHjarNI/S4VgFAbw56WhQUIQUVB6EXG4H8AzNLS0RGt9g6jPcRvrG7REW3MtQQ3tcfaLiTjIXSQMQxDMV96mG1yovP151sP5DQ+P0FrjPyPGQGYWAE4BvBDR2Z9AZl4DcG4YxpFSSnddd0xEF78CmXkdwJVpmvtRFKHve8xms0EpdUBENz8CmXkDwLVlWTthGEIIAQBo2xZJkrwNw7BHRA8rgcxsA7h1HIeklB/YIk3TIE3TV631bhzHj9+CzLwJ4N7zvInv+1/2VNc1six71lpvE9HTpyAzTwDcSSml67qj86iqCnmezwFsEdF8CWTmEyHENAgC2La98ubKskRRFABwSUSHC3Bs2WLkvvT/PgAltYPssspMtAAAAABJRU5ErkJggg==) no-repeat center;border-bottom:2px solid #fff}
+.codeWrap>.triangle.open_bottom{left:50%;margin-left:-10px;bottom:-9px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAEVSURBVHjalNKxSsNQGMXx/5VCdrN26jP023RSEAQXB1/AxTfQ1edQ8A18hK5Svj5AQ2hLryaQGEIltFAhuS4VE2pbcra7/Dic+xnnnOMvBqi/W+cIMKr6oqokSdIKy7KM0WiEqj5uyhjzW1BVu8Bbr9fr+r5/EEuSBGutBS5EZFxvCICIfADns9nsc7FY7MWiKMJaOwZO6lgD3KABcDWZTL6KotiCnHPM53PiOFbgVETe/9uwkX6/P6yq6joMw+/VatXAptMpaZoOgDMRyXZ9ylZEZFCW5U0QBOV6vaaqKsIwJM/zV+BSRIpdc5jm1TSjqree5z11Oh2zXC6fgTsRKfftuxfcoPfAMfAgIgfP6iDYNj8DAJzHiyTga4IwAAAAAElFTkSuQmCC) no-repeat center;border-top:2px solid #fff}
+.icons-float-left .social-icon-24+.codeWrap{left:24px}
+.icons-float-left .social-icon-32+.codeWrap{left:32px}
+.icons-float-left .social-icon-48+.codeWrap{left:48px}
+.icons-float-left .social-icon-64+.codeWrap{left:64px}
+.sitewidget-follow .codeWrap img{max-width:300px}
+.svg-box{padding:5px;background:#000;color:#fff;transition:all .3s;display:inline-block;line-height:1;overflow:hidden;vertical-align:middle}

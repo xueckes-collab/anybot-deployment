@@ -1,0 +1,11 @@
+.ms-showcase2-template{margin:0 auto}
+.ms-showcase2-vertical{width:66%;float:left;margin-bottom:15px}
+.ms-showcase2-template .ms-view{background:transparent}
+@media only screen and (max-width:768px){.ms-showcase2-vertical{width:100%}
+.sitewidget-proddetail .proddetail-wrap .proddetail-style-volid-slider-description{width:100%}
+}
+@media only screen and (max-width:420px){.ms-showcase2-vertical{width:100%}
+.sitewidget-proddetail .proddetail-wrap .proddetail-style-volid-slider-description{width:100%}
+.ms-skin-default .ms-nav-next{right:0}
+.ms-skin-default .ms-nav-prev{left:0}
+}

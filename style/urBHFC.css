@@ -1,0 +1,44 @@
+#component_pmAqhuByjCvt,#component_gCpLMPVdEDBj,#component_iipVrPBIOsCZ,#component_qTALMagyjsEZ,#component_BRKqrlGHckvZ,#component_syUqCbQdpYPZ{
+	position: relative;
+    top: -20px;
+}
+#column_1621100532850{
+	position: relative;
+    bottom: -20px;
+}
+#component_myAqrtEZHVCj,#component_omfBMEOtwqPj,#component_otABMZOERVdj,#component_mdfLWjEOmCVt,#component_jgKVMtOjcWFZ,#component_rFpVMEZtwWzO{
+	position: relative;
+    top: -10px;
+}
+
+.ls_change_lang_container .ls_change_lang_btn .ls_change_lang_icon > svg{
+  height:20px!important;
+}
+
+.gallery-summery-wrap .gallery-summery{
+  opacity: 1!important;
+}
+
+.gallery-summery-wrap .gallery-inner{
+  padding: 0 6%!important;
+}
+
+.sitewidget-gallery .summery-cont-button{
+  padding: 0 35px!important;
+}
+
+.sitewidget-gallery-20240702210951 .summery-button-wrap .summery-cont-button{
+  margin: 30px 0px 6% 0!important;
+}
+
+#sitewidget-advancedSlider-20250130191128-advancedSlider > DIV:nth-child(1) > DIV > DIV:nth-child(4) > DIV > H1 > SPAN > SPAN {
+	line-height:72px !important;
+}
+
+#sitewidget-advancedSlider-20250130191128-advancedSlider > DIV:nth-child(1) > DIV > DIV:nth-child(4) > DIV > H1 > SPAN > SPAN {
+	line-height:56px !important;
+}
+
+.holidayNotice-rightBottom .sitewidget-bd{
+  max-height: 480px!important;
+}

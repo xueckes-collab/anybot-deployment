@@ -1,0 +1,36 @@
+.memberFindPassword input{border:1px solid #dcdcdc;line-height:43px;height:43px;text-indent:20px;border-radius:5px;outline:0;overflow:hidden;font-size:16px;width:338px}
+.memberFindPassword input:focus{outline:0;border:1px solid #209eea}
+.memberFindPassword .member-group{margin-bottom:25px}
+.memberFindPassword .member-group .member-error-msg{width:340px;margin:0 auto}
+.memberFindPassword .findPwd-title{font-size:16px;font-weight:normal;line-height:2;margin-bottom:28px}
+.memberFindPassword .findPwd-btn,.memberFindPassword .submit-btn{display:inline-block;width:340px;line-height:45px;background-color:#209eea;color:#fff;font-size:18px;border-radius:5px;text-align:center;-moz-transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-o-transition:all .2s ease-out;-ms-transition:all .2s ease-out;transition:all .2s ease-out}
+.memberFindPassword .findPwd-btn:hover,.memberFindPassword .submit-btn:hover{color:#fff;background-color:#008dd7;text-decoration:none}
+.memberFindPassword .findPwd-text{color:#727171}
+.memberCenter-wrap.memberFindPassword-step1{width:498px;padding:36px 0;text-align:center}
+.memberCenter-wrap.memberFindPassword-step2{width:750px;padding:20px 0}
+.memberCenter-wrap.memberFindPassword-step3{width:498px;padding:50px 0 36px 0;text-align:center}
+.memberFindPassword .memberFindPassword-step2 .findPwd-text{margin:0 25px}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item{margin:0 25px;padding:35px 0 25px 0}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item+.findPwd-way-item{border-top:1px solid #dcdcdc}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-way-icon{float:left;width:60px;height:60px;margin-right:10px;background:url(../styleRelated/rGZXbI.png) no-repeat -250px 0}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-way-icon.sms-reset{background-position:-250px 0}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-way-icon.email-reset{background-position:-250px -60px}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-way-icon.artifi-reset{background-position:-250px -120px}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-way-info{float:left;width:420px}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-way-title{font-size:18px;margin-bottom:15px}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-way-detail{color:#727171}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-reset-btn{float:right;background-color:#209eea;color:#fff;font-size:16px;line-height:35px;margin:25px 16px 0 0;display:inline-block;padding:0 28px;border-radius:5px;-moz-transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-o-transition:all .2s ease-out;-ms-transition:all .2s ease-out;transition:all .2s ease-out}
+.memberFindPassword .memberFindPassword-step2 .findPwd-way-item .findPwd-reset-btn:hover{background-color:#008dd7;text-decoration:none}
+.memberFindPassword .member-group-split{width:340px;margin:0 auto 25px auto}
+.memberFindPassword .member-group-split>input{width:48%;float:left}
+.memberFindPassword .member-group-split>a.checkcode-img-wrap{width:45%;height:45px;float:right}
+.memberFindPassword .member-group-split>a.checkcode-img-wrap .checkcode-img{width:100%;height:100%}
+.memberFindPassword .sms-code-btn{float:right;display:block;width:45%;text-align:center;line-height:45px;border-radius:5px;background-color:#f5a21b;color:#fff;-moz-transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-o-transition:all .2s ease-out;-ms-transition:all .2s ease-out;transition:all .2s ease-out}
+.memberFindPassword .sms-code-btn:hover{background-color:#f0831e}
+.memberFindPassword .member-help-info{margin:25px auto;width:300px;text-align:left;padding:20px;border-radius:5px;border:1px solid #fbdebe;background-color:#fbf0d6;color:#727171}
+.memberFindPassword .member-help-info h4{font-weight:bold;line-height:1.5}
+.errormessage{color:red;clear:both}
+.findpassword-method-form input.block{width:99.6%;border:1px solid #d7d7d7;border-radius:3px;height:42px;line-height:42px;text-indent:20px}
+.findpassword-method-form .validatepic{position:absolute;right:1%;top:3px;width:auto;height:38px}
+@media(max-width:480px){.findpassword-method-form .validatepic{width:160px}
+}

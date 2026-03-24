@@ -1,0 +1,324 @@
+.block11494 {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.block11494 .blockTitle {
+    font-size: 2.5em;
+    color: #000000;
+    margin-bottom: 40px;
+    line-height: 120%;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-left: 45px;
+    width: calc(100% - 45px);
+}
+
+.block11494 .wrapper {
+    width: 100%;
+}
+
+.block11494 .tile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 120px;
+    position: relative;
+    /* z-index: 2; */
+}
+
+.block11494 .tile:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.block11494 .imgBox {
+    padding: 0 15px;
+    width: calc(33.33333333% - 30px);
+    position: relative;
+}
+
+.block11494 .imgBox img {
+    width: 370px;
+    height: 370px;
+    border-radius: 100%;
+    border: 10px solid transparent;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    object-fit: cover;
+}
+
+
+.block11494 .textBox {
+    padding: 0 15px;
+    width: calc(66.66666667% - 30px);
+    position: relative;
+    z-index: 2;
+}
+
+.block11494 .textWra {
+    width: calc(85% - 46px);
+    margin: 0 auto;
+    padding: 25px 23px 20px;
+    box-shadow: 0px 0px 22px 0px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    background: #fff;
+}
+.block11494 .buttonBox .component-button-editor{
+    top: 0;
+}
+.block11494 .title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #000;
+    transition: all 0.3s ease;
+    line-height: 150%;
+    font-weight: 500;
+}
+
+.block11494 .content {
+    line-height: 170%;
+    letter-spacing: 0.5px;
+    color: #616161;
+    font-size: 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.block11494 .tile:hover .imgBox img {
+    border-color: #009f5d;
+}
+
+.block11494 .tile:hover .textWra {
+    background-color: #009f5d;
+}
+
+.block11494 .tile:hover .textWra .title {
+    color: #fff;
+}
+
+.block11494 .tile:hover .textWra .content {
+    color: #fff;
+}
+
+.block11494 .number {
+    font-size: 100px;
+    color: #dddddd;
+    text-align: left;
+    position: absolute;
+    /* right: -90px;
+    bottom: 0; */
+    top: 100%;
+    left: -60px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.block11494 .tile:nth-child(even) .number {
+    right: -80px;
+    left: auto;
+}
+
+.block11494 .tile:hover .number {
+    left: -30px;
+}
+
+.block11494 .tile:nth-child(even):hover .number {
+    right: -50px;
+    left: auto;
+}
+
+.block11494 .navigation {
+    position: relative;
+}
+
+.block11494 .line {
+    position: absolute;
+    z-index: 1;
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40%;
+    background-color: #dddddd;
+}
+
+.block11494 .tile:last-child .line {
+    height: 60%;
+}
+.block11494 .but{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+}
+.block11494 .buttonBox {
+    display: inline-block;
+    border-radius: 25px;
+}
+
+.block11494 .buttonBox .backstage-componet-bd {
+    border-radius: 25px;
+}
+
+.block11494 .buttonBox a {
+    padding: 12px 60px;
+    color: #fff;
+    background-color: inherit;
+    border-radius: 25px;
+    font-size: 0.9em;
+    display: inline-block;
+    transition: .3s;
+}
+
+@media screen and (max-width:1200px) and (min-width:990px) {
+    .block11494 .imgBox img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .block11494 .tile {
+        padding-bottom: 80px;
+    }
+
+    /* .block11494 .tile:hover .number {
+        right: -105px;
+    } */
+
+    /* .block11494 .tile:nth-child(even):hover .number {
+        left: -90px;
+        right: auto;
+    } */
+
+    .block11494 .imgBox {
+        padding: 0 10px;
+        width: calc(33.33333333% - 20px);
+        position: relative;
+    }
+
+    .block11494 .textBox {
+        padding: 0 10px;
+        width: calc(66.66666667% - 20px);
+    }
+
+    /* .block11494 .textWra {
+        width: calc(77% - 46px)
+    } */
+
+    .block11494 .number {
+        font-size: 90px;
+        left: -70px;
+    }
+
+    .block11494 .tile:hover .number {
+        left: -40px;
+    }
+}
+
+@media screen and (max-width:990px) {
+    .block11494 .tile {
+        flex-direction: column;
+        padding-bottom: 80px;
+    }
+
+    .block11494 .tile:nth-child(even) {
+        flex-direction: column;
+    }
+
+    .block11494 .imgBox {
+        width: calc(100% - 20px);
+        z-index: 2;
+        padding: 0 10px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .block11494 .textBox {
+        width: calc(100% - 20px);
+        padding: 0 10px;
+        margin-top: 30px;
+    }
+
+    .block11494 .title {
+        text-align: center;
+    }
+
+    .block11494 .content {
+        text-align: center;
+    }
+
+    .block11494 .number {
+        right: 12%;
+        top: unset;
+        bottom: 100%;
+        left: unset;
+    }
+
+    .block11494 .tile:nth-child(even) .number {
+        right: 12%;
+        left: auto;
+    }
+
+    .block11494 .tile:nth-child(even):hover .number {
+        right: 10%;
+        left: auto;
+    }
+
+    .block11494 .tile:hover .number {
+        right: 10%;
+        left: unset;
+    }
+
+    .block11494 .line {
+        top: 30%;
+    }
+
+    .block11494 .tile:last-child .line {
+        height: 70%;
+    }
+
+    .block11494 .blockTitle {
+        margin: 0 10px 40px;
+        width: calc(100% - 20px);
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .block11494 .number {
+        right: 5%;
+        font-size: 50px;
+        /* bottom: -20px; */
+    }
+
+    .block11494 .tile:hover .number {
+        right: 5%;
+    }
+
+    .block11494 .tile:nth-child(even) .number {
+        right: 4%;
+        left: auto;
+    }
+
+    .block11494 .tile:nth-child(even):hover .number {
+        right: 4%;
+        left: auto;
+    }
+
+    .block11494 .imgBox img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .block11494 .textWra {
+        width: calc(100% - 46px)
+    }
+}

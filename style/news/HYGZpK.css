@@ -1,0 +1,24 @@
+@media(min-width:767px) and (max-width:989px){.row .col-md-3.col-sm-6.col-xs-6:nth-child(2n+1){clear:both}
+.row .col-md-3.col-sm-3.col-xs-6:nth-child(4n+1){clear:both}
+.row .col-md-3.col-sm-3.col-xs-3:nth-child(4n+1){clear:both}
+.row .col-md-2.col-sm-4.col-xs-4:nth-child(3n+1){clear:both}
+.row .col-md-2.col-sm-6.col-xs-4:nth-child(2n+1){clear:both}
+.row .col-md-2.col-sm-4.col-xs-6:nth-child(3n+1){clear:both}
+.row .col-md-2.col-sm-6.col-xs-6:nth-child(2n+1){clear:both}
+.row .col-md-1.col-sm-4.col-xs-4:nth-child(3n+1){clear:both}
+.row .col-md-1.col-sm-4.col-xs-3:nth-child(3n+1){clear:both}
+.row .col-md-1.col-sm-3.col-xs-4:nth-child(4n+1){clear:both}
+.row .col-md-1.col-sm-3.col-xs-3:nth-child(4n+1){clear:both}
+}
+@media(min-width:1px) and (max-width:767px){.row .col-md-3.col-sm-6.col-xs-6:nth-child(2n+1){clear:both}
+.row .col-md-3.col-sm-3.col-xs-6:nth-child(2n+1){clear:both}
+.row .col-md-3.col-sm-3.col-xs-3:nth-child(4n+1){clear:both}
+.row .col-md-2.col-sm-4.col-xs-4:nth-child(3n+1){clear:both}
+.row .col-md-2.col-sm-6.col-xs-4:nth-child(3n+1){clear:both}
+.row .col-md-2.col-sm-4.col-xs-6:nth-child(2n+1){clear:both}
+.row .col-md-2.col-sm-6.col-xs-6:nth-child(2n+1){clear:both}
+.row .col-md-1.col-sm-4.col-xs-4:nth-child(3n+1){clear:both}
+.row .col-md-1.col-sm-4.col-xs-3:nth-child(4n+1){clear:both}
+.row .col-md-1.col-sm-3.col-xs-4:nth-child(3n+1){clear:both}
+.row .col-md-1.col-sm-3.col-xs-3:nth-child(4n+1){clear:both}
+}

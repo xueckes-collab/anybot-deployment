@@ -1,0 +1,8 @@
+__pycache__
+*.pyc
+.env
+backend/data/extracted/
+backend/data/chroma_db/
+.git
+.vscode
+*.md

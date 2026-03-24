@@ -1,0 +1,506 @@
+{
+  "conversations": [
+    {
+      "id": 1,
+      "session_id": "b6724b87-06a6-4694-bbf1-6a482cd201b9",
+      "created_at": "2026-03-18 07:52:22"
+    },
+    {
+      "id": 2,
+      "session_id": "24db6d80-5a75-4022-bb75-2cf7558ef0d4",
+      "created_at": "2026-03-18 08:04:33"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "What SPC flooring options do you offer?",
+      "created_at": "2026-03-18 07:52:22"
+    },
+    {
+      "id": 2,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "Great question — we have quite a range to choose from. Our SPC flooring comes in wood-look, stone-look, and some modern abstract designs, with options in different plank sizes, textures (like embossed or smooth), and wear layer thicknesses depending on where you plan to install it.\n\nAre you looking for something specific — maybe for residential use, commercial projects, or a certain style you have in mind? That way I can point you toward the best options.",
+      "created_at": "2026-03-18 07:52:22"
+    },
+    {
+      "id": 3,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "Which type of flooring do you recommend the most? I want to use it in the shopping mall.",
+      "created_at": "2026-03-18 07:53:37"
+    },
+    {
+      "id": 4,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "For a shopping mall, I'd definitely recommend our commercial-grade SPC flooring with a thicker wear layer — usually 0.5mm or above. It holds up really well under heavy foot traffic, is scratch-resistant, and easy to maintain. Plus, it's fully waterproof, which helps with spills and cleaning.\n\nWe have several high-traffic collections designed exactly for that kind of use. Would you like me to share some popular mall-friendly options or a catalog so you can see the finishes and colors available?",
+      "created_at": "2026-03-18 07:53:37"
+    },
+    {
+      "id": 5,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "Which floor is best for underfloor heating?",
+      "created_at": "2026-03-18 08:04:33"
+    },
+    {
+      "id": 6,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Great question — a lot of customers ask this when planning heated floors.  \n\nSPC flooring is generally the top choice for underfloor heating. It’s dimensionally stable, meaning it won’t expand or contract much with temperature changes, and it handles heat well up to around 85°F (29°C) subfloor temperature.  \n\nLVT can also work, but rigid core SPC tends to perform more consistently over time with heating systems.  \n\nIf you’re considering a specific room or project, I can help narrow down suitable thicknesses and finishes that pair well with heating.",
+      "created_at": "2026-03-18 08:04:33"
+    },
+    {
+      "id": 7,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "is your click easy to break",
+      "created_at": "2026-03-18 08:11:02"
+    },
+    {
+      "id": 8,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "That's a smart thing to check — nobody wants planks that snap during installation.\n\nOur click system is designed for strength and ease. The locking mechanism is precision-engineered to hold securely without being brittle. Most breakage issues come from improper handling or trying to force an angle during installation, not from the lock itself.\n\nWe test our click joints for durability and repeated assembly, so they’re reliable under normal use. If you’re DIY installing, I’d recommend dry-fitting a few pieces first to get the feel — it usually clicks smoothly with a gentle tap.\n\nAre you planning to install it yourself, or working with a contractor?",
+      "created_at": "2026-03-18 08:11:02"
+    },
+    {
+      "id": 9,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "the click of floor is floating, why it happen and what can I do",
+      "created_at": "2026-03-18 08:12:37"
+    },
+    {
+      "id": 10,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Good observation — a floating click floor can sometimes feel slightly bouncy or \"float\" if the subfloor isn’t perfectly level, or if there’s debris underneath.\n\nHere’s what usually causes it and what you can do:\n\n**Common causes:**\n- Subfloor unevenness (even small dips or bumps)\n- Debris or dust left under the underlayment\n- Insufficient expansion gap around the edges\n- Low-quality underlayment that compresses too much\n\n**Quick fixes:**\n1. Check the subfloor level before laying — it should be flat within 3mm over 1 meter.\n2. Make sure the underlayment is smooth and debris-free.\n3. Ensure you’ve left the proper expansion gap (usually 8–10mm) around walls.\n4. If it’s already installed, you can sometimes add leveling compound in low spots by carefully lifting affected planks.\n\nIf you’re dealing with an existing floating floor, is it a recent installation, or has it developed over time?",
+      "created_at": "2026-03-18 08:12:37"
+    },
+    {
+      "id": 11,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "Hello tony",
+      "created_at": "2026-03-18 08:35:01"
+    },
+    {
+      "id": 12,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Hi there — nice to meet you! I’m actually the chat assistant here, but you can think of me as your go-to person for flooring questions. 😊\n\nHow can I help you today? Looking for product info, samples, or just exploring options?",
+      "created_at": "2026-03-18 08:35:01"
+    },
+    {
+      "id": 13,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "I want to buy spc flooring",
+      "created_at": "2026-03-18 08:35:16"
+    },
+    {
+      "id": 14,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Great! SPC flooring is a solid choice — durable, waterproof, and works well in most spaces.\n\nTo help you find the right fit, I’d suggest starting with a couple of quick details:\n\n1. **Where will it be used?** (e.g., residential, commercial, kitchen, bathroom, basement)\n2. **Do you have a preferred thickness or wear layer in mind?** (Common options are 4mm–6mm thickness, with wear layers from 0.3mm to 0.7mm depending on traffic.)\n\nOnce I know a bit more, I can share some suitable options, color ideas, or arrange samples if you’d like.",
+      "created_at": "2026-03-18 08:35:16"
+    },
+    {
+      "id": 15,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "4mm 12mil wearlayer  + 1.0mm IXPE how much",
+      "created_at": "2026-03-18 08:35:53"
+    },
+    {
+      "id": 16,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Thanks for the clear specs — that helps a lot.\n\nFor a 4mm SPC with a 12 mil wear layer and 1.0mm IXPE underlayment attached, the price can vary depending on the finish, color, order quantity, and whether it’s a stock design or custom.\n\nTo give you an accurate quote, I’d need to know:\n- **Approximate quantity** (e.g., a small project, container load, or distributor volume)\n- **Preferred finish** (e.g., matt, embossed, wood grain, etc.)\n\nIf you’re still exploring, I can also share our catalog so you can see available designs and finishes first. Would you like me to send it over?",
+      "created_at": "2026-03-18 08:35:53"
+    },
+    {
+      "id": 17,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "3000sqm",
+      "created_at": "2026-03-18 08:36:10"
+    },
+    {
+      "id": 18,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Thanks — 3000 sqm is a solid project quantity. For that volume, we can offer competitive pricing and usually arrange production scheduling smoothly.\n\nFor 4mm SPC with 12 mil wear layer + 1.0mm IXPE attached, I’d be happy to prepare a formal quotation for you.\n\nTo make it accurate, could you let me know:\n- **Preferred finish** (e.g., wood embossed, matt, handscraped, or any specific color family you’re leaning toward)\n- **Click system preference** (Unilin, Valinge, or I4F — or if you don’t have one, I can recommend the most common for your region)\n\nOnce I have those details, I’ll put together a detailed quote with pricing, lead time, and packaging info. Would you like me to also share some popular color options in that spec range?",
+      "created_at": "2026-03-18 08:36:10"
+    },
+    {
+      "id": 19,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "wood embossed",
+      "created_at": "2026-03-18 08:36:29"
+    },
+    {
+      "id": 20,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Perfect — wood embossed is a popular choice for its realistic look and texture.\n\nFor 3000 sqm of 4mm SPC with 12 mil wear layer + 1.0mm IXPE in wood embossed finish, I’ll prepare a detailed quotation for you.\n\nTo finalize the quote, I’ll need just one more detail:\n- **Click system preference** — Unilin, Valinge, or I4F?  \n*(If you’re not sure, I can recommend the most common and reliable option for your region.)*\n\nOnce confirmed, I’ll include pricing, lead time, packaging, and available color options in the quote. Would you like me to send over a color catalog or sample set as well, so you can see the wood embossed designs up close?",
+      "created_at": "2026-03-18 08:36:29"
+    },
+    {
+      "id": 21,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "unilin",
+      "created_at": "2026-03-18 08:36:44"
+    },
+    {
+      "id": 22,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Got it — Unilin click system is a reliable and widely used choice. Good pick.\n\nI’ll prepare a formal quotation for:\n- **3000 sqm**\n- **4mm SPC**\n- **12 mil wear layer**\n- **1.0mm IXPE attached**\n- **Wood embossed finish**\n- **Unilin click system**\n\nThe quote will include:\n- Unit price & total amount\n- Lead time\n- Packaging details\n- Available wood embossed color options\n\nWould you like me to send it to your email? If so, please share your email address, and I’ll have it prepared shortly.\n\nAlso, if you’d like physical samples of the wood embossed designs before finalizing, I can arrange a sample kit to be shipped to you.",
+      "created_at": "2026-03-18 08:36:44"
+    },
+    {
+      "id": 23,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "I want a sample",
+      "created_at": "2026-03-18 08:37:46"
+    },
+    {
+      "id": 24,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Sure — samples are a great way to check the texture, color, and quality before you decide.\n\nI can arrange a sample kit with a few popular wood embossed designs in the 4mm SPC + 1.0mm IXPE spec you’re considering.\n\nTo get it shipped to you, I’ll just need:\n- **Your shipping address** (you can share it here or via email)\n- **Contact name & phone number** (for the courier)\n\nOnce I have those, I’ll confirm the sample dispatch and share a tracking number with you.\n\nWould you like me to include any specific color tones (e.g., light oak, grey wood, walnut) in the sample pack?",
+      "created_at": "2026-03-18 08:37:46"
+    },
+    {
+      "id": 25,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "I want to know your MOQ",
+      "created_at": "2026-03-18 08:45:58"
+    },
+    {
+      "id": 26,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "MOQ can vary depending on the product and whether it’s a stock design or custom, but for standard SPC flooring like the 4mm wood embossed we discussed, our typical starting quantity is **500 sqm**.\n\nFor larger orders like 3000 sqm, we can offer more favorable pricing and production scheduling. If you’re testing the market or starting smaller, we can often work with you on initial quantities — especially if you’re open to popular stock colors.\n\nWould you like me to clarify MOQ for a specific thickness, finish, or custom branding scenario?",
+      "created_at": "2026-03-18 08:45:58"
+    },
+    {
+      "id": 27,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "how many colors i can choose",
+      "created_at": "2026-03-18 08:46:58"
+    },
+    {
+      "id": 28,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "For wood embossed SPC flooring in the 4mm + IXPE spec, we usually offer **20–30+ color options** in stock designs. These range from light oaks and greys to medium browns, charcoals, and rustic tones.\n\nIf you’re open to custom colors, we can match specific shades with a slightly higher MOQ and longer lead time.\n\nWould you like me to send you a color catalog (PDF) so you can browse the options visually? That usually helps narrow down preferences before sampling.",
+      "created_at": "2026-03-18 08:46:58"
+    },
+    {
+      "id": 29,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "i need samples",
+      "created_at": "2026-03-18 08:47:24"
+    },
+    {
+      "id": 30,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Sure — I’ll arrange a sample kit with a selection of our most popular wood embossed colors in the 4mm SPC + 1.0mm IXPE spec.\n\nTo ship it to you, I’ll need:\n- **Your shipping address**\n- **Contact name & phone number**\n\nOnce I have those details, I’ll confirm the sample dispatch and share the tracking info with you.\n\nWould you like me to include any specific color families (e.g., light oak, grey wood, walnut, white wash) in the sample pack?",
+      "created_at": "2026-03-18 08:47:24"
+    },
+    {
+      "id": 31,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "are you trading company or factory",
+      "created_at": "2026-03-18 08:47:58"
+    },
+    {
+      "id": 32,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "We’re a **factory** — we produce SPC, LVT, and related flooring products in-house. That means we control quality, lead time, and pricing directly, and we can support custom requests more flexibly than a trading company would.\n\nIf you’d like, I can share factory photos, certifications, or production details to give you a clearer picture. Would that be helpful?",
+      "created_at": "2026-03-18 08:47:58"
+    },
+    {
+      "id": 33,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "what is your flooring warranty",
+      "created_at": "2026-03-18 08:48:36"
+    },
+    {
+      "id": 34,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "For residential use, our SPC flooring typically comes with a **15–25 year limited warranty**, depending on the wear layer and product series. For the 4mm with 12 mil wear layer we discussed, it generally carries a **20-year residential warranty**.\n\nThe warranty covers manufacturing defects and wear under normal residential conditions, provided installation and maintenance guidelines are followed.\n\nIf you’re using it for commercial or heavy-traffic projects, I can check the specific warranty terms for that application.\n\nWould you like me to share the warranty document or go over the key coverage points in more detail?",
+      "created_at": "2026-03-18 08:48:36"
+    },
+    {
+      "id": 35,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "do you have floor skirting",
+      "created_at": "2026-03-18 08:49:03"
+    },
+    {
+      "id": 36,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Yes, we do offer **matching floor skirting** — including PVC skirting that pairs well with our SPC and LVT flooring.\n\nOur skirting is designed to coordinate in color and finish, comes in various profiles, and is easy to install. It’s moisture-resistant, durable, and works well in kitchens, bathrooms, and high-traffic areas.\n\nWould you like me to share photos or profiles of the skirting options? I can also include them in your sample pack if you’re interested.",
+      "created_at": "2026-03-18 08:49:03"
+    },
+    {
+      "id": 37,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "do you have spc EIR floor",
+      "created_at": "2026-03-19 05:27:28"
+    },
+    {
+      "id": 38,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "Yes, we do offer SPC flooring with Embossed-in-Register (EIR) texture. It's a popular choice because it gives a very realistic wood-like feel and look, with the texture perfectly matching the printed grain.\n\nWe have several herringbone SPC collections that feature EIR. For example, our AY827 and AY831 series come in different colors and finishes with this high-definition texture.\n\nAre you looking for a specific color tone or finish (like matte or gloss), or do you have a particular project in mind? I can help narrow down the options.",
+      "created_at": "2026-03-19 05:27:28"
+    },
+    {
+      "id": 39,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "which color you have",
+      "created_at": "2026-03-19 05:27:55"
+    },
+    {
+      "id": 40,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "For our EIR SPC flooring, we have a good range of colors to suit different styles. The most popular ones are:\n\n*   **Light & Natural:** Light oak, ash gray, and creamy beige — great for making spaces feel bigger and brighter.\n*   **Mid-Tones:** Classic oak, walnut, and warm brown — very versatile and timeless.\n*   **Dark & Rich:** Deep charcoal, espresso, and dark walnut — perfect for adding warmth and a modern, cozy feel.\n\nWe also have some unique options like weathered gray and rustic white for a more distinctive look.\n\nTo help you find the best match, what kind of room or project are you planning for? That usually makes it easier to pick the right color.",
+      "created_at": "2026-03-19 05:27:55"
+    },
+    {
+      "id": 41,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "we need more colors to choose from",
+      "created_at": "2026-03-19 05:28:34"
+    },
+    {
+      "id": 42,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "I totally get that — having more options makes it easier to find the perfect match for your vision.\n\nBeyond the classic neutrals, we also have some more distinctive colors in our EIR collections. For example:\n*   **Cool Tones:** Slate gray, driftwood, and weathered barnwood.\n*   **Warm & Rustic:** Honey maple, chestnut, and a rustic white with subtle grain.\n*   **Modern & Bold:** Some series include deep charcoal with a slight brown undertone, and a matte black option for a sleek, contemporary look.\n\nWould it help if I sent you our full EIR color catalog? That way you can see all the shades and finishes (like matte, silk, or hand-scraped) in one place. Just let me know your email or how you'd prefer to receive it.",
+      "created_at": "2026-03-19 05:28:34"
+    },
+    {
+      "id": 43,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "pls give me some colors",
+      "created_at": "2026-03-19 05:28:56"
+    },
+    {
+      "id": 44,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "Sure — here are some specific color names from our EIR SPC collections to give you a clearer idea:\n\n*   **Light & Airy:** Natural Oak, Arctic White, Pearl Gray\n*   **Mid-Tone Classics:** Golden Oak, Smoked Walnut, Urban Gray\n*   **Warm & Rich:** Rustic Chestnut, Honey Maple, Toffee\n*   **Dark & Modern:** Charcoal Black, Espresso, Deep Slate\n*   **Distinctive Styles:** Weathered Barnwood, Driftwood Gray, Vintage White\n\nIf you're looking for something specific — like a cool gray with brown undertones, a very light Scandinavian look, or a deep matte finish — just let me know the style direction. I can check which series has the closest match and share photos or samples.",
+      "created_at": "2026-03-19 05:28:56"
+    },
+    {
+      "id": 45,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "can you give me photo",
+      "created_at": "2026-03-19 05:29:09"
+    },
+    {
+      "id": 46,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "I'd be happy to share photos of the EIR colors. However, I'm a chat assistant and can't upload images directly here in the chat.\n\nThe best way to see all the colors clearly is through our digital catalog. It has high-resolution photos of each color and finish, which is much more helpful than a small preview.\n\nIf you'd like, I can have the catalog (with all the EIR color photos) sent directly to your email. Just let me know your email address, and I'll arrange it right away.\n\nAlternatively, if you're interested in a specific color tone I mentioned (like \"Weathered Barnwood\" or \"Charcoal Black\"), I can also check if we have a direct image link available to share here.",
+      "created_at": "2026-03-19 05:29:09"
+    },
+    {
+      "id": 47,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "did you export to usa before",
+      "created_at": "2026-03-19 05:29:26"
+    },
+    {
+      "id": 48,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "Yes, we have exported to the USA before. Many of our SPC flooring products, including the EIR collections, are shipped to distributors and project clients across different states.\n\nWe're familiar with U.S. market requirements, including quality expectations, packaging standards, and common logistics routes. If you have specific questions about certifications, shipping lead times, or labeling for the U.S., feel free to ask.\n\nAre you looking to import for a distribution business or for a specific project? That sometimes makes a difference in how we set up the order.",
+      "created_at": "2026-03-19 05:29:26"
+    },
+    {
+      "id": 49,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "which city you are export in usa",
+      "created_at": "2026-03-19 05:30:07"
+    },
+    {
+      "id": 50,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "We export to various cities across the USA — it really depends on the port of entry and the final destination requested by our customers. Common ports include Los Angeles, Long Beach, New York/New Jersey, Houston, Savannah, and Seattle.\n\nOnce the container arrives at the port, it can be shipped by truck to almost any city inland.\n\nIf you have a specific delivery city or region in mind, I can check with our logistics team about the most common and efficient routing for that area. Are you located in or shipping to a particular state?",
+      "created_at": "2026-03-19 05:30:07"
+    },
+    {
+      "id": 51,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "can you have introduction for your company",
+      "created_at": "2026-03-19 05:30:37"
+    },
+    {
+      "id": 52,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "Sure — we're a professional manufacturer focused on SPC, LVT, and PVC flooring, along with related interior building materials like wall panels. We've been in the industry for several years, supplying products mainly for export markets, including the USA, Europe, Australia, and more.\n\nWe emphasize quality control, customization options (like private labeling), and reliable supply for both projects and distributors. Our factory is equipped for consistent production, and we hold common international certifications relevant to flooring.\n\nIf you'd like more specific details — such as our factory location, annual capacity, or main certifications — just let me know what you're most interested in, and I can share accordingly.",
+      "created_at": "2026-03-19 05:30:37"
+    },
+    {
+      "id": 53,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "are you trading company or real factory?",
+      "created_at": "2026-03-19 05:30:51"
+    },
+    {
+      "id": 54,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "We are a real factory — we produce our own SPC, LVT, and PVC flooring. We handle everything from raw material mixing to extrusion, printing, embossing, and final packaging in our own facility.\n\nThat's one reason we can offer more flexibility on customization, MOQ, and quality control compared to a trading company.\n\nIf it helps, I can share some photos or details about our production lines or factory setup. Would you be interested in seeing that?",
+      "created_at": "2026-03-19 05:30:51"
+    },
+    {
+      "id": 55,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "what product you now can supply",
+      "created_at": "2026-03-19 05:31:17"
+    },
+    {
+      "id": 56,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "Currently, we can supply a full range of interior flooring and wall solutions. Here’s a quick overview:\n\n**Flooring:**\n*   **SPC Flooring:** Including EIR (Embossed-in-Register) collections, waterproof click systems, various thicknesses (4mm–8mm), and finishes (matte, silk, hand-scraped).\n*   **LVT Flooring:** Flexible vinyl tiles and planks, often used in commercial projects.\n*   **PVC Flooring:** Including homogeneous and heterogeneous sheets for heavy-duty use.\n\n**Wall Solutions:**\n*   **Quickstone Wall Panels/Tiles:** Waterproof, lightweight, and easy-to-install panels for bathrooms, kitchens, and feature walls. Available in various textures, colors, and finishes (including antibacterial options).\n\nWe also support customization in size, color, wear layer, packaging, and private labeling.\n\nIs there a specific product type or application you're focusing on? That way I can give you more relevant details.",
+      "created_at": "2026-03-19 05:31:17"
+    },
+    {
+      "id": 57,
+      "conversation_id": 1,
+      "role": "user",
+      "content": "can  you do spc wall panel and wpc wall panel",
+      "created_at": "2026-03-19 05:31:44"
+    },
+    {
+      "id": 58,
+      "conversation_id": 1,
+      "role": "assistant",
+      "content": "Yes, we can do both SPC wall panels and WPC wall panels.\n\n*   **SPC Wall Panels:** Made with a stone-plastic composite core, they are very rigid, waterproof, and durable — great for high-moisture areas like bathrooms and kitchens. They usually have a click-lock system for easy installation.\n*   **WPC Wall Panels:** Made with wood-plastic composite, they are slightly softer, warmer to the touch, and often have better sound insulation. They're also waterproof and work well for both interior and some exterior applications.\n\nBoth come in various textures, colors, and finishes (wood, stone, plain, etc.).\n\nAre you looking for a specific application (e.g., bathroom, balcony, interior feature wall) or do you have a preference in terms of material feel or installation method? That will help me point you in the right direction.",
+      "created_at": "2026-03-19 05:31:44"
+    },
+    {
+      "id": 59,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "What SPC flooring options do you offer?",
+      "created_at": "2026-03-20 02:40:34"
+    },
+    {
+      "id": 60,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "We offer a wide range of SPC flooring options, including realistic wood looks like oak and walnut, stone finishes such as marble and slate, and various textures from smooth to embossed. Are you looking for something specific for a residential project or commercial use?",
+      "created_at": "2026-03-20 02:40:34"
+    },
+    {
+      "id": 61,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "i like to order 2 containers,pls tell me when can delivery",
+      "created_at": "2026-03-20 02:42:50"
+    },
+    {
+      "id": 62,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Great! For two containers, our standard lead time is around 25–35 days after order confirmation, depending on the specific product and quantity. Could you let me know which thickness or color series you're interested in? That way I can give you a more precise timeline.",
+      "created_at": "2026-03-20 02:42:50"
+    },
+    {
+      "id": 63,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "how many colors you can give in one container",
+      "created_at": "2026-03-20 02:43:30"
+    },
+    {
+      "id": 64,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "That depends on the product and packaging, but typically we can arrange 4–6 colors in one 20-foot container, sometimes more if the quantities per color are smaller. If you have specific colors in mind, I can check the feasibility and suggest a practical mix.",
+      "created_at": "2026-03-20 02:43:30"
+    },
+    {
+      "id": 65,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "we need some specifications together in one container,is it ok",
+      "created_at": "2026-03-20 02:44:20"
+    },
+    {
+      "id": 66,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "Yes, that's usually fine — we can mix different specifications (like thicknesses, colors, or textures) in one container, as long as the total quantity meets the minimum per SKU. To make sure it works smoothly, could you share roughly how many different specs you're planning to include?",
+      "created_at": "2026-03-20 02:44:20"
+    },
+    {
+      "id": 67,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "how many colors you can give in one container",
+      "created_at": "2026-03-20 05:16:54"
+    },
+    {
+      "id": 68,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "For standard SPC flooring orders, we typically pack one color per container to keep logistics simple and avoid mix-ups.  \n\nIf you need multiple colors in one container, we can arrange that — it’s common for projects or distributors who want a color assortment. We’d just need to confirm the exact colors and quantities per SKU so we can plan the loading properly.  \n\nAre you looking at a specific project or planning a mixed shipment for stock?",
+      "created_at": "2026-03-20 05:16:54"
+    },
+    {
+      "id": 69,
+      "conversation_id": 2,
+      "role": "user",
+      "content": "What could be the reason if my assembled lock catch is lifted up?",
+      "created_at": "2026-03-20 05:21:25"
+    },
+    {
+      "id": 70,
+      "conversation_id": 2,
+      "role": "assistant",
+      "content": "That’s a common issue with click-lock flooring — usually caused by one of three things:\n\n1. **Subfloor unevenness** – even a small bump under the plank can prevent the lock from seating fully.\n2. **Debris in the groove** – tiny particles or leftover cutting dust can block the tongue from locking down flat.\n3. **Improper tapping** – if the plank wasn’t tapped evenly during installation, one side of the lock may not be fully engaged.\n\nA quick fix is to check the subfloor for flatness, clean the locking grooves thoroughly, and use a tapping block + mallet to gently re-seat the lifted edge. If it keeps happening on multiple planks, it might be worth checking the locking system quality.",
+      "created_at": "2026-03-20 05:21:25"
+    }
+  ]
+}

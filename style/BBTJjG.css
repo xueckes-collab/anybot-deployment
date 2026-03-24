@@ -1,0 +1,130 @@
+.block12014 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.block12014 .wrapper {
+    width: 100%;
+}
+
+.block12014 .tile {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.block12014 .tile:last-child {
+    flex-direction: row-reverse;
+}
+
+.block12014 .textBox {
+    width: calc(50% - 30px);
+    padding: 0 15px;
+
+}
+
+.block12014 .text {
+    color: #616161;
+    font-size: 15px;
+    line-height: 170%;
+    letter-spacing: 0.5px;
+    word-break: break-word;
+}
+
+.block12014 .button {
+    display: inline-block;
+    border-radius: 2px;
+    margin-top: 38px;
+    background-color: #ffa92a;
+    position: relative;
+    transition: .3s;
+}
+
+.block12014 .button .backstage-componet-bd {
+    padding: 10px 40px 10px 40px;
+}
+
+.block12014 .button a {
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.block12014 .button:hover {
+    background: #182333;
+}
+
+.block12014 .imgBox {
+    width: calc(50% - 30px);
+    padding: 0 15px;
+}
+
+.block12014 .imgWra {
+    width: 100%;
+    /* height: 397px; */
+}
+
+.block12014 .imgWra .backstage-componet-bd,
+.block12014 .imgWra .backstage-componet {
+    width: 100%;
+    height: 100%;
+}
+
+.block12014 .imgWra img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.block12014 .tile:last-child {
+    margin-top: 70px;
+}
+
+.block12014 .tile:last-child .textBox {
+    left: 50%;
+}
+
+.block12014 .tile:last-child .imgBox {
+    margin-left: 0;
+}
+
+@media screen and (max-width:1200px) {
+    .block12014 .textBox {
+        width: calc(50% - 20px);
+        padding: 0 10px;
+    }
+
+    .block12014 .imgBox {
+        width: calc(50% - 20px);
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .block12014 .textBox {
+        position: unset;
+        width: calc(100% - 20px);
+        margin-bottom: 20px;
+    }
+
+    .block12014 .imgBox {
+        width: calc(100% - 20px);
+        margin: 0;
+    }
+
+    .block12014 .tile:last-child {
+        margin-top: 10px;
+        flex-direction: column-reverse;
+    }
+    .block12014 .tile{
+        flex-direction: column-reverse;
+    }
+
+    /* .block12014 .button {
+        margin-top: 20px;
+    } */
+    .block12014 .imgWra {
+        height: unset;
+    }
+}

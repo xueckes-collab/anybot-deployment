@@ -1,0 +1,44 @@
+#backstage-headArea-mobile{display:none}
+div.sitewidget-mobile_showFontFamily .header-styles a{font-size:14px;font-weight:initial;letter-spacing:initial;line-height:50px;text-align:initial}
+@media(max-width:989px){#backstage-headArea-mobile{display:block}
+.frontend-body-canvas #backstage-headArea.hideForMobile{display:none}
+.backstage-body-canvas #backstage-headArea-mobile{display:none}
+.backstage-body-canvas #backstage-headArea-mobile.on{display:block}
+}
+.head-hide{visibility:hidden}
+.ofh{height:100%;max-height:100%;overflow:hidden;position:relative}
+.ofxh{width:100%;max-width:100%;overflow-x:hidden;position:relative}
+.head-icon-menu{display:inline-block;width:40px;height:40px;background-color:#fff;z-index:100;position:absolute}
+.head-icon-menu .menu-icon{position:relative;display:block;width:30px;height:2px;background-color:#000;top:50%;left:50%;margin-top:-1px;margin-left:-15px;-moz-transition:background-color .1s ease-out;-ms-transition:background-color .1s ease-out;-o-transition:background-color .1s ease-out;transition:background-color .1s ease-out;-webkit-transition:background-color .1s ease-out}
+.head-icon-menu.open .menu-icon{background-color:transparent}
+.head-icon-menu .menu-icon::after,.head-icon-menu .menu-icon::before{content:'';position:absolute;display:block;width:30px;height:2px;background-color:#000;left:0;-moz-transition:.1s ease-out;-ms-transition:.1s ease-out;-o-transition:.1s ease-out;transition:.1s ease-out;-webkit-transition:.1s ease-out}
+.head-icon-menu .menu-icon::after{top:8px}
+.head-icon-menu .menu-icon::before{top:-8px}
+.head-icon-menu.open .menu-icon::after,.head-icon-menu.open .menu-icon::before{top:0;width:30px;-moz-transform-origin:50% 50%;-ms-transform-origin:50% 50%;-o-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transform-origin:50% 50%}
+.head-icon-menu.open .menu-icon::after{-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg);-webkit-transform:rotate(45deg)}
+.head-icon-menu.open .menu-icon::before{-moz-transform:rotate(-45deg);-ms-transform:rotate(-45deg);-o-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform:rotate(-45deg)}
+.head-icon-menu.icon-pos-left.icon-drop-left{top:0;left:0}
+.head-icon-menu.icon-pos-right.icon-drop-right{top:0;right:0}
+.head-icon-menu.icon-pos-left.icon-drop-down{top:0;left:0}
+.head-icon-menu.icon-pos-right.icon-drop-down{top:0;right:0}
+.head-icon-menu.icon-drop-left.open{left:100%;margin-left:-40px}
+.head-icon-menu.icon-drop-right.open{right:100%;margin-right:-40px}
+#backstage-headArea.mhStyle-simple{position:absolute;z-index:100;width:100%;max-width:100%;background-color:#fff;max-height:100%;box-sizing:border-box;overflow-y:auto;top:0}
+#backstage-headArea.mhStyle-simple.drop-left{height:100%;margin-left:-40px;padding-left:40px;left:-100%}
+#backstage-headArea.mhStyle-simple.drop-right{height:100%;margin-right:-40px;padding-right:40px;right:-100%}
+#backstage-headArea.mhStyle-simple.drop-down{max-height:90%;position:fixed;top:40px;box-shadow:2px 10px 20px 0 rgba(0,0,0,0.2)}
+#backstage-headArea.mhStyle-simple.open{position:fixed;box-shadow:2px 20px 20px 0 rgba(0,0,0,0.2)}
+#backstage-headArea.mhStyle-simple.open.drop-left{left:0}
+#backstage-headArea.mhStyle-simple.open.drop-right{right:0}
+.icon-drop-left.head-icon-menu,#backstage-headArea.mhStyle-simple.drop-left{-moz-transition:left .3s ease-in;-ms-transition:left .3s ease-in;-o-transition:left .3s ease-in;transition:left .3s ease-in;-webkit-transition:left .3s ease-in}
+.icon-drop-right.head-icon-menu,#backstage-headArea.mhStyle-simple.drop-right{-moz-transition:right .3s ease-in;-ms-transition:right .3s ease-in;-o-transition:right .3s ease-in;transition:right 500ms ease-in;-webkit-transition:right .3s ease-in}
+@media(max-width:989px){#backstage-headArea.mhStyle-simple .container{max-width:100%}
+#backstage-headArea.mhStyle-simple .sitewidget-navigation .navigation-thumb-parent{display:none}
+#backstage-headArea.mhStyle-simple .sitewidget-navigation ul.nav{display:block}
+}
+.topTools{height:0;overflow:visible}
+.topTools .checkStyle{display:none}
+.topTools .styleIndex{display:none}
+.topTools .resetStyle{position:absolute;top:0;left:0;margin:0;display:none}
+.nav-box,.header-style01 .nav-words{display:none}
+.nav-box.others-ele{display:block}

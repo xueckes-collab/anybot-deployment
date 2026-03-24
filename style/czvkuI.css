@@ -1,0 +1,212 @@
+.sitewidget-atlasList .sitewidget-bd .paging{margin-top:20px;margin-bottom:20px}
+.sitewidget-atlasList .sitewidget-bd .paging>li{display:inline-block}
+.sitewidget-atlasList .sitewidget-bd .paging>li+li{margin-left:5px}
+.sitewidget-atlasList .sitewidget-bd .paging>li>a,.sitewidget-bd .paging>li>span{display:inline-block;text-align:center;line-height:28px;min-width:28px;font-size:14px;color:#898989}
+.sitewidget-atlasList .sitewidget-bd .paging>li>a{text-decoration:none;border:1px solid #c9caca}
+.sitewidget-atlasList .sitewidget-bd .paging>li>a:hover{text-decoration:none;border:1px solid #0079c3;color:#0079c3}
+.sitewidget-atlasList .sitewidget-bd .paging>li.active>span{color:#fff;background-color:#0079c3;border:1px solid #0079c3}
+.sitewidget-atlasList .sitewidget-bd .paging-wrap.txtc ul.paging{text-align:center}
+.sitewidget-atlasList .sitewidget-bd .paging-wrap.txtl ul.paging{text-align:left;}
+.sitewidget-atlasList .sitewidget-bd .paging-wrap.txtr ul.paging{text-align:right}
+
+/* ===========================================================================
+   ====================	 图册列表样式
+ */
+.sitewidget-atlasList .sitewidget-bd>ul{
+	margin:0 -5px;
+}
+
+.sitewidget-atlasList .atlasList-item{
+	position: relative;
+	display: table;
+ 	float:left;
+	padding:5px;
+    padding-bottom: 46px;
+	width: calc(25% - 10px);	
+    min-width: 150px;
+    /* max-width: 290px; */
+    margin-bottom: 5px;
+}
+ 
+.sitewidget-atlasList .atlasList-item .item-box{
+    vertical-align: middle;
+ 	position: relative;
+	padding: 5px;
+ 	border: 1px solid #ccc;
+	text-align: center;
+    height: 165px;
+}
+ 
+.sitewidget-atlasList .atlasList-item .item-box img{
+	width: auto;
+  	vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.sitewidget-atlasList .atlasList-item .item-desc{
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px 10px;
+    line-height: 19px;
+    height: 35px;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}                                                           
+
+/*atlas_list_style_1.html样式*/                                                        
+.atlas_list_style_1_LiStyle{
+    box-shadow: -1px 0px 5px 1px rgba(19, 19, 19, 0.15);
+    width: 100%;
+    height: 210px;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+}
+.sitewidget-atlasList .atlasList-item .item_box_style_1{
+    border: none;
+    z-index: 1;
+    display: block;
+}            
+.sitewidget-atlasList .atlasList-item .item_desc_style_1{
+    top: 165px;
+}                                                            
+.sitewidget-atlasList .atlasList_item_atlaslist_style_1{
+    padding: 15px;
+    width: 22%;
+}               
+.atlas_list_style_1_LiStyle_Banner{
+    position: absolute;
+    height: 180px;
+    width: 10px;
+    right: 10px;
+    top: 24px;
+    z-index: 0;
+    transform: rotate(3deg);
+    box-shadow: 2px -1px 5px 1px rgba(19, 19, 19, 0.1);
+} 
+    .item-box-forbidden{
+     		cursor: pointer;
+        }
+ /*图片预览*/
+        .Picture{overflow: hidden; display: none; margin: 0 auto; position: fixed; top:0; left:0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.7); z-index: 889;}
+        .Picture-box{ overflow: hidden; width: 100%; height: 100%; position: relative;}
+        .Picture-box .theme{ overflow: hidden; width: auto; position: absolute; top:0; left:0;  bottom: 0; right:0; margin: auto;}
+        .Picture-box .open	{ overflow: hidden; width: 43px; height: 58px;font-size: 16px; color: #666; text-align: center; background: rgba(0, 0, 0, 0.4); position: absolute; top:0;bottom: 0; margin: auto; z-index: 2;}
+        .Picture-box .mine	{ left:0; }
+        .Picture-box .Next{ right:0;}
+    	.Picture-box .theme{width:100%}
+    	.Picture-box .theme-img{    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);}
+        .Picture-box .theme img{ overflow: hidden; max-width: 90%; margin: 0 auto; display: block;  object-fit: cover;max-height: 100%;}
+        .Picture-box .gb-btn{ overflow: hidden; width: 35px; height: 35px; line-height: 30px; display: block; position: absolute; top:10px; right:10px; font-size: 50px; color: #fff; text-align: center; }
+
+        /*兼容样式*/
+        @media (min-width:1080px) and (max-width:2400px){
+            .Picture-box .theme{ width: 100%; height: 100%;}
+            .Picture-box .theme img{  height: auto;}
+            }
+    
+@media(max-width:1200px){
+	/*atlas_list_style_1.html样式*/   
+	.sitewidget-atlasList .atlasList_item_atlaslist_style_1{
+    	width: 20.5%;
+    }
+    .sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+        top: 140px;
+    }
+.sitewidget-atlasList .atlasList-item .item_box_style_1 {
+    	height: 140px;
+	}
+    .atlas_list_style_1_LiStyle{
+        height:185px;
+    }
+}
+                                                            
+@media (max-width: 800px){
+	.sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+	    width: 20%;
+	}
+	.sitewidget-atlasList .atlasList-item .item_box_style_1 {
+    	height: 120px;
+	}
+	.sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+    	top: 120px;
+	}
+	.atlas_list_style_1_LiStyle{
+		height: 165px;
+	}
+    .atlas_list_style_1_LiStyle_Banner{
+        height: 150px;
+    }
+}
+                                                            
+@media (max-width: 700px){
+	.sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+	    width: 28%;
+	}
+	.sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+	    top: 133px;
+	}
+}                                                            
+
+@media(max-width:639px){
+	.sitewidget-atlasList .atlasList-item{	
+		width: calc(50% - 10px);
+	}
+    .sitewidget-atlasList .atlasList-item .item-box{
+    	height: 80px;
+    }
+}                                                            
+ 
+@media (max-width: 600px){
+	.sitewidget-atlasList .atlasList_item_atlaslist_style_1 {
+	    width: 40%;
+	}
+    .sitewidget-atlasList .atlasList_item_atlaslist_style_1{
+    	min-width: 140px;
+    }
+    .atlas_list_style_1_LiStyle_Banner{
+        height: 150px;
+    }
+    .sitewidget-atlasList .atlasList-item .item_desc_style_1 {
+        top: 83px;
+    }
+    .atlas_list_style_1_LiStyle {
+        height: 125px;
+    }
+    .atlas_list_style_1_LiStyle_Banner {
+        height: 110px;
+        right: 11px;
+    }
+}
+.theme-detail{
+    position: absolute;
+    color: #EEE;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,.45);
+    text-align: center;
+    padding: 10px 40px;
+    box-sizing: border-box;
+    display: none;
+}
+.theme-title{
+    font-size: 13px;
+    font-weight: bold;
+}
+.theme-content{
+    width: 100%;
+    word-break: break-word;
+    font-size: 12px;
+    margin: 5px 0 0;
+}

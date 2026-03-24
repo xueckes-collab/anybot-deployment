@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+dist/
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# Data (可选，如果您希望重新生成知识库)
+# chatbot/backend/data/chroma_db/
+
+# OS
+.DS_Store
+Thumbs.db
