@@ -28,6 +28,7 @@
     constructor() {
       this.isOpen = false;
       this.sessionId = localStorage.getItem("aw_chat_session") || null;
+      this.userEmail = localStorage.getItem("aw_chat_email") || null;
       this.isStreaming = false;
       this._createShadowDOM();
       this._bindEvents();
@@ -74,6 +75,18 @@
             <textarea class="aw-chat-input" placeholder="Type your question..." rows="1"></textarea>
             <button class="aw-chat-send" aria-label="Send">${ICONS.send}</button>
           </div>
+          <div class="aw-login-screen">
+            <div class="aw-login-body">
+              <div class="aw-login-icon">${ICONS.bot}</div>
+              <h4>Welcome to Anyway Flooring!</h4>
+              <p>Please enter your email address to start chatting with our assistant.</p>
+              <form class="aw-login-form" novalidate>
+                <input type="email" class="aw-login-input" placeholder="your@email.com" autocomplete="email" />
+                <p class="aw-login-error" hidden></p>
+                <button type="submit" class="aw-login-btn">Start Chatting</button>
+              </form>
+            </div>
+          </div>
         </div>
       `;
       this.shadow.appendChild(wrapper);
@@ -83,6 +96,10 @@
       this.messages = this.shadow.querySelector(".aw-chat-messages");
       this.input = this.shadow.querySelector(".aw-chat-input");
       this.sendBtn = this.shadow.querySelector(".aw-chat-send");
+      this.loginScreen = this.shadow.querySelector(".aw-login-screen");
+      this.loginInput = this.shadow.querySelector(".aw-login-input");
+      this.loginError = this.shadow.querySelector(".aw-login-error");
+      this.loginForm = this.shadow.querySelector(".aw-login-form");
     }
 
     _bindEvents() {
@@ -109,6 +126,11 @@
           this._sendMessage();
         });
       });
+
+      this.loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        this._handleEmailSubmit();
+      });
     }
 
     _toggleChat() {
@@ -116,8 +138,27 @@
       this.panel.classList.toggle("open", this.isOpen);
       this.toggle.classList.toggle("active", this.isOpen);
       if (this.isOpen) {
-        setTimeout(() => this.input.focus(), 300);
+        if (!this.userEmail) {
+          this.loginScreen.classList.add("visible");
+          setTimeout(() => this.loginInput.focus(), 300);
+        } else {
+          this.loginScreen.classList.remove("visible");
+          setTimeout(() => this.input.focus(), 300);
+        }
       }
+    }
+
+    _handleEmailSubmit() {
+      const email = this.loginInput.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        this.loginError.textContent = "Please enter a valid email address.";
+        this.loginError.hidden = false;
+        return;
+      }
+      this.userEmail = email;
+      localStorage.setItem("aw_chat_email", email);
+      this.loginScreen.classList.remove("visible");
+      setTimeout(() => this.input.focus(), 100);
     }
 
     _appendMessage(role, content) {
@@ -276,6 +317,7 @@
           body: JSON.stringify({
             message: message,
             session_id: this.sessionId,
+            user_email: this.userEmail,
           }),
           signal: controller.signal,
         });
@@ -540,6 +582,40 @@
       transition:all .2s ease; font-family:var(--aw-font); font-weight:500;
     }
     .aw-quick-btn:hover { background:var(--aw-orange-light); border-color:var(--aw-orange); color:var(--aw-orange-dark); transform:translateY(-1px); box-shadow:0 2px 8px rgba(232,131,42,.15); }
+    .aw-login-screen {
+      display:none; position:absolute; inset:0; background:var(--aw-bg); z-index:10;
+      align-items:center; justify-content:center; padding:24px;
+    }
+    .aw-login-screen.visible { display:flex; }
+    .aw-login-body { width:100%; max-width:300px; text-align:center; }
+    .aw-login-icon {
+      width:64px; height:64px; background:linear-gradient(145deg,var(--aw-green),var(--aw-green-dark));
+      border-radius:20px; display:flex; align-items:center; justify-content:center;
+      margin:0 auto 18px; box-shadow:0 6px 20px rgba(26,135,84,.3);
+    }
+    .aw-login-icon svg { width:30px; height:30px; fill:#fff; }
+    .aw-login-body h4 { font-size:18px; font-weight:700; color:var(--aw-text); margin:0 0 8px; }
+    .aw-login-body > p { font-size:13px; color:var(--aw-text-secondary); margin:0 0 24px; line-height:1.5; }
+    .aw-login-form { display:flex; flex-direction:column; gap:12px; }
+    .aw-login-input {
+      width:100%; border:1.5px solid var(--aw-border); border-radius:12px;
+      padding:11px 14px; font-size:14px; font-family:var(--aw-font);
+      color:var(--aw-text); background:var(--aw-bg-secondary); outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    .aw-login-input:focus { border-color:var(--aw-green); box-shadow:0 0 0 3px rgba(26,135,84,.1); background:var(--aw-bg); }
+    .aw-login-input::placeholder { color:#9ca3af; }
+    .aw-login-error { font-size:12px; color:#dc2626; margin:0; text-align:left; }
+    .aw-login-btn {
+      width:100%; padding:12px;
+      background:linear-gradient(135deg,var(--aw-green),var(--aw-green-dark));
+      color:#fff; border:none; border-radius:12px; font-size:14px; font-weight:600;
+      font-family:var(--aw-font); cursor:pointer;
+      transition:opacity .2s ease, transform .15s ease;
+      box-shadow:0 3px 12px rgba(26,135,84,.35);
+    }
+    .aw-login-btn:hover { opacity:.92; transform:translateY(-1px); }
+    .aw-login-btn:active { transform:scale(.97); }
     @media (max-width:480px) {
       .aw-chat-panel { bottom:0; right:0; width:100vw; height:100vh; max-height:100vh; border-radius:0; }
       .aw-chat-toggle { bottom:16px; right:16px; width:54px; height:54px; }
