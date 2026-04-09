@@ -1,7 +1,6 @@
 /**
  * JSON 文件存储（无需原生依赖）
  */
-import bcrypt from 'bcryptjs';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -19,19 +18,22 @@ if (!fs.existsSync(DOCS_DIR)) {
 }
 
 const DEFAULT_DATA = {
-  users: [],
   config: { temperature: '0.7', max_tokens: '2048', model: 'deepseek-chat', system_prompt_id: '1' },
   prompt_templates: [],
   quick_replies: [],
   documents: [],
   conversations: [],
   messages: [],
+  login_logs: [],
 };
 
 function load() {
   if (!fs.existsSync(DATA_FILE)) return { ...DEFAULT_DATA };
   try {
-    return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+    const d = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+    // 兼容旧数据：补充缺失字段
+    if (!d.login_logs) d.login_logs = [];
+    return d;
   } catch {
     return { ...DEFAULT_DATA };
   }
@@ -43,16 +45,9 @@ function save(data) {
 
 let _data = load();
 
-// 初始化默认管理员
-if (_data.users.length === 0) {
-  _data.users.push({
-    id: 1,
-    username: 'admin',
-    password_hash: bcrypt.hashSync('admin123', 10),
-    created_at: new Date().toISOString(),
-  });
-  // 默认 Prompt
-  _data.prompt_templates.push({
+// 初始化默认 Prompt（如果还没有）
+if (!_data.prompt_templates || _data.prompt_templates.length === 0) {
+  _data.prompt_templates = [{
     id: 1,
     name: 'Default',
     content: `You are an intelligent product consultant for Anyway Flooring, a professional flooring and wall panel manufacturer. Your job is to help customers learn about products, compare options, and make informed decisions.
@@ -69,16 +64,11 @@ Rules:
     is_active: 1,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
-  });
+  }];
   save(_data);
 }
 
 const db = {
-  users: {
-    findByUsername(username) {
-      return _data.users.find((u) => u.username === username);
-    },
-  },
   config: {
     getAll() {
       return { ..._data.config };
@@ -194,6 +184,81 @@ const db = {
       save(_data);
     },
   },
+  login_logs: {
+    // 记录一次登录
+    add(email, ip) {
+      if (!_data.login_logs) _data.login_logs = [];
+      const id = (_data.login_logs.reduce((m, x) => Math.max(m, x.id), 0)) + 1;
+      _data.login_logs.push({ id, email, ip: ip || '', login_at: new Date().toISOString() });
+      save(_data);
+    },
+    // 返回所有登录记录，按时间倒序
+    all() {
+      if (!_data.login_logs) return [];
+      return [..._data.login_logs].sort((a, b) => (b.login_at > a.login_at ? 1 : -1));
+    },
+    // 返回去重后的用户列表（每个邮箱只保留最新登录时间）
+    uniqueUsers() {
+      if (!_data.login_logs) return [];
+      const map = new Map();
+      for (const log of _data.login_logs) {
+        if (!map.has(log.email) || log.login_at > map.get(log.email).last_login) {
+          map.set(log.email, {
+            email: log.email,
+            last_login: log.login_at,
+            login_count: 0,
+          });
+        }
+      }
+      // 统计每个邮箱的登录次数
+      for (const log of _data.login_logs) {
+        if (map.has(log.email)) {
+          map.get(log.email).login_count++;
+        }
+      }
+      return [...map.values()].sort((a, b) => (b.last_login > a.last_login ? 1 : -1));
+    },
+  },
 };
 
 export { db, DATA_DIR, DOCS_DIR };
+at: new Date().toISOString(),
+  });
+  save(_data);
+}
+
+const db = {
+    users: {
+          findByUsername(username) {
+                  return _data.users.find((u) => u.username === username);
+          },
+    },
+
+    config: {
+          getAll() {
+                  return { ..._data.config };
+          },
+          set(key, value) {
+                  _data.config[key] = String(value);
+                  save(_data);
+          },
+    },
+
+    prompt_templates: {
+          all() {
+                  return [..._data.prompt_templates];
+          },
+          get(id) {
+                  return _data.prompt_templates.find((p) => p.id === id);
+          },
+          create(name, content) {
+                  const id = (_data.prompt_templates.reduce((m, p) => Math.max(m, p.id), 0)) + 1;
+                  const now = new Date().toISOString();
+                  _data.prompt_templates.push({ id, name, content, is_active: 0, created_at: now, updated_at: now });
+                  save(_data);
+                  return id;
+          },
+          update(id, data) {
+                  const p = _data.prompt_templates.find((x) => x.id === id);
+                  if (!p) return;
+                  if (data.name !== undefined) p.name = data.name
