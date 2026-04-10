@@ -19,9 +19,9 @@ const transporter = nodemailer.createTransport({
   port: parseInt(process.env.SMTP_PORT || '587'),
   secure: false,
   auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-    },
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
 });
 
 // 内存存储验证码
@@ -39,6 +39,15 @@ router.post('/send-code', async (req, res) => {
   }
   if (ALLOWED_EMAILS.length > 0 && !ALLOWED_EMAILS.includes(email.toLowerCase())) {
     return res.status(403).json({ success: false, message: '该邮箱无权限登录' });
+  }
+
+  // 检查是否被封禁（发送验证码前即拦截）
+  try {
+    if (db.login_logs.isBanned(email)) {
+      return res.status(403).json({ success: false, message: '该账户已被禁用，请联系管理员' });
+    }
+  } catch (e) {
+    console.warn('检查封禁状态失败:', e.message);
   }
 
   const existing = codeStore.get(email);
@@ -86,6 +95,15 @@ router.post('/verify-code', (req, res) => {
   const { email, code } = req.body;
   if (!email || !code) {
     return res.status(400).json({ success: false, message: '参数缺失' });
+  }
+
+  // 先检查封禁状态（在验证码校验之前）
+  try {
+    if (db.login_logs.isBanned(email)) {
+      return res.status(403).json({ success: false, message: '该账户已被禁用，请联系管理员' });
+    }
+  } catch (e) {
+    console.warn('检查封禁状态失败:', e.message);
   }
 
   const record = codeStore.get(email);
