@@ -7,6 +7,7 @@ import Config from './pages/Config';
 import Conversations from './pages/Conversations';
 import Documents from './pages/Documents';
 import QuickReplies from './pages/QuickReplies';
+import Users from './pages/Users';
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -35,7 +36,8 @@ export default function App() {
             <Route path="documents" element={<Documents />} />
             <Route path="quick-replies" element={<QuickReplies />} />
           </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="users" element={<Users />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
