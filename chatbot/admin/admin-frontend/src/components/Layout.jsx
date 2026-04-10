@@ -7,6 +7,7 @@ const navItems = [
   { to: '/conversations', label: '对话记录' },
   { to: '/documents', label: '知识库文档' },
   { to: '/quick-replies', label: '快捷回复' },
+  { to: '/users', label: '用户管理' },
 ];
 
 export default function Layout() {
