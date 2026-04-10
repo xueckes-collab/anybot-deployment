@@ -182,3 +182,47 @@ export async function deleteDocument(id) {
     if (!res.ok) throw new Error('删除失败');
     return res.json();
 }
+
+
+// ——— 用户管理 API ———
+
+export async function getUsers() {
+  const res = await fetch(`${API_BASE}/users`, { headers: headers() });
+  if (!res.ok) throw new Error('获取用户列表失败');
+  return res.json();
+}
+
+export async function getUserLogs() {
+  const res = await fetch(`${API_BASE}/users/logs`, { headers: headers() });
+  if (!res.ok) throw new Error('获取登录记录失败');
+  return res.json();
+}
+
+export async function banUser(email) {
+  const res = await fetch(`${API_BASE}/users/ban`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({ email }),
+  });
+  if (!res.ok) throw new Error('封禁用户失败');
+  return res.json();
+}
+
+export async function unbanUser(email) {
+  const res = await fetch(`${API_BASE}/users/unban`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({ email }),
+  });
+  if (!res.ok) throw new Error('解封用户失败');
+  return res.json();
+}
+
+export async function deleteUser(email) {
+  const res = await fetch(`${API_BASE}/users/${encodeURIComponent(email)}`, {
+    method: 'DELETE',
+    headers: headers(),
+  });
+  if (!res.ok) throw new Error('注销用户失败');
+  return res.json();
+}
