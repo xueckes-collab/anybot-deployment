@@ -39,8 +39,8 @@ app.use('/api/config', configRouter);
 app.use('/api/prompts', promptsRouter);
 app.use('/api/quick-replies', quickRepliesRouter);
 app.use('/api/conversations', conversationsRouter);
-app.use('/api/users', usersRouter);
 app.use('/api/documents', documentsRouter);
+app.use('/api/users', usersRouter);
 // POST /api/upload 上传知识库文件
 app.post('/api/upload', authMiddleware, upload.single('file'), uploadHandler);
 
@@ -58,7 +58,7 @@ if (fs.existsSync(indexHtml)) {
   app.get('/conversations', serveIndex);
   app.get('/documents', serveIndex);
   app.get('/quick-replies', serveIndex);
-    app.get('/users', serveIndex);
+  app.get('/users', serveIndex);
   app.get('*', (req, res, next) => {
     if (req.path.startsWith('/api') || req.path.startsWith('/assets')) return next();
     res.sendFile(indexHtml);
