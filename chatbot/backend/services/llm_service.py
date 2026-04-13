@@ -2,7 +2,6 @@
 LLM service: manages prompt construction and OpenAI API calls with streaming support.
 Reads system prompt, temperature, max_tokens, model from admin config when available.
 """
-
 from __future__ import annotations
 
 from collections.abc import AsyncGenerator
@@ -24,7 +23,6 @@ Rules:
 
 【Product Knowledge】
 {context}"""
-
 
 _async_client: AsyncOpenAI | None = None
 
@@ -60,12 +58,10 @@ def build_messages(
     system_content = template.format(context=context)
     system_msg = {"role": "system", "content": system_content}
     messages = [system_msg]
-
     settings = get_settings()
     max_turns = settings.max_history_turns
     if chat_history:
         messages.extend(chat_history[-max_turns * 2 :])
-
     messages.append({"role": "user", "content": user_message})
     return messages
 
@@ -91,7 +87,6 @@ async def chat_stream(
     model, temp, max_tok = _get_llm_params()
     client = _get_async_client()
     messages = build_messages(context, user_message, chat_history)
-
     stream = await client.chat.completions.create(
         model=model,
         messages=messages,
@@ -99,7 +94,6 @@ async def chat_stream(
         temperature=temp,
         max_tokens=max_tok,
     )
-
     async for chunk in stream:
         if not chunk.choices:
             continue
@@ -113,16 +107,8 @@ async def chat_complete(
     user_message: str,
     chat_history: list[dict],
 ) -> str:
-    """Non-streaming chat completion."""
-    model, temp, max_tok = _get_llm_params()
-    client = _get_async_client()
-    messages = build_messages(context, user_message, chat_history)
-
-    response = await client.chat.completions.create(
-        model=model,
-        messages=messages,
-        temperature=temp,
-        max_tokens=max_tok,
-    )
-
-    return response.choices[0].message.content or ""
+    """Non-streaming chat completion (collects tokens from streaming call)."""
+    tokens: list[str] = []
+    async for token in chat_stream(context, user_message, chat_history):
+        tokens.append(token)
+    return "".join(tokens)
