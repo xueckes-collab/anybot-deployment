@@ -1,18 +1,15 @@
 """
 Chat API router: handles conversation requests with RAG-augmented responses.
 """
-
 from __future__ import annotations
 
 import json
 import asyncio
 import logging
 import traceback
-
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
-
 from services import rag_service, llm_service, session_manager
 
 logger = logging.getLogger(__name__)
@@ -52,23 +49,24 @@ async def chat(req: ChatRequest) -> ChatResponse:
         session_manager.add_message(session_id, "assistant", quick)
         return ChatResponse(reply=quick, session_id=session_id, sources=[])
 
-    session_id = req.session_id or session_manager.create_session()
-    history = session_manager.get_history(session_id)
-
-    chunks = await asyncio.to_thread(rag_service.retrieve, req.message)
-    context = rag_service.format_context(chunks)
-
-    reply = await llm_service.chat_complete(context, req.message, history)
-
-    session_manager.add_message(session_id, "user", req.message)
-    session_manager.add_message(session_id, "assistant", reply)
-
-    sources = [
-        {"name": c["name"], "type": c["type"]}
-        for c in chunks if c["name"]
-    ]
-
-    return ChatResponse(reply=reply, session_id=session_id, sources=sources)
+    try:
+        session_id = req.session_id or session_manager.create_session()
+        history = session_manager.get_history(session_id)
+        chunks = await asyncio.to_thread(rag_service.retrieve, req.message)
+        context = rag_service.format_context(chunks)
+        reply = await llm_service.chat_complete(context, req.message, history)
+        session_manager.add_message(session_id, "user", req.message)
+        session_manager.add_message(session_id, "assistant", reply)
+        sources = [
+            {"name": c["name"], "type": c["type"]}
+            for c in chunks if c["name"]
+        ]
+        return ChatResponse(reply=reply, session_id=session_id, sources=sources)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("Chat error: %s\n%s", e, traceback.format_exc())
+        raise HTTPException(status_code=500, detail=f"Chat error: {str(e)}")
 
 
 @router.post("/chat/stream")
@@ -91,10 +89,8 @@ async def chat_stream(req: ChatRequest):
 
     session_id = req.session_id or session_manager.create_session()
     history = session_manager.get_history(session_id)
-
     chunks = await asyncio.to_thread(rag_service.retrieve, req.message)
     context = rag_service.format_context(chunks)
-
     sources = [
         {"name": c["name"], "type": c["type"]}
         for c in chunks if c["name"]
@@ -106,16 +102,13 @@ async def chat_stream(req: ChatRequest):
                 "session_id": session_id,
                 "sources": sources,
             })}
-
             full_reply = []
             async for token in llm_service.chat_stream(context, req.message, history):
                 full_reply.append(token)
                 yield {"event": "token", "data": token}
-
             complete_reply = "".join(full_reply)
             session_manager.add_message(session_id, "user", req.message)
             session_manager.add_message(session_id, "assistant", complete_reply)
-
             yield {"event": "done", "data": ""}
         except Exception as e:
             logger.error("SSE stream error: %s\n%s", e, traceback.format_exc())
