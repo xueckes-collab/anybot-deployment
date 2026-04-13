@@ -1,7 +1,4 @@
-"""
-Anyway Flooring Chatbot - FastAPI Application
-"""
-
+""" Anyway Flooring Chatbot - FastAPI Application """
 import asyncio
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -36,6 +33,7 @@ app = FastAPI(
 )
 
 settings = get_settings()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -52,6 +50,12 @@ widget_dir = _project_root / "chatbot" / "widget"
 _html_dir = _project_root / "html"
 _style_dir = _project_root / "style"
 _img_dir = _project_root / "img"
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    """Return 204 No Content for favicon to suppress browser 404 errors."""
+    return Response(status_code=204)
 
 
 @app.get("/")
@@ -98,10 +102,8 @@ if _style_dir.exists():
 if _img_dir.exists():
     app.mount("/img", StaticFiles(directory=str(_img_dir)), name="img")
 
-
 # 最后包含 API 路由
 app.include_router(chat_router)
-
 
 if __name__ == "__main__":
     import uvicorn
