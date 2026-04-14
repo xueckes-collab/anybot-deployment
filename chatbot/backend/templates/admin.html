@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>管理员后台 - Anyway Flooring</title>
+<style>
+  :root { --brand:#2563eb; --bg:#f5f7fb; --border:#e2e8f0; --text:#0f172a; --muted:#64748b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+         background:var(--bg); color:var(--text); }
+  .bar { display:flex; align-items:center; justify-content:space-between;
+         padding:16px 28px; background:#fff; border-bottom:1px solid var(--border); }
+  .bar h1 { margin:0; font-size:18px; }
+  .bar .right { display:flex; align-items:center; gap:14px; font-size:13px; color:var(--muted); }
+  .bar button { border:1px solid var(--border); background:#fff; padding:7px 14px;
+                border-radius:6px; cursor:pointer; font-size:13px; }
+  .wrap { padding:28px; }
+  .stats { display:flex; gap:16px; margin-bottom:20px; }
+  .stat { background:#fff; border:1px solid var(--border); border-radius:10px;
+          padding:18px 22px; flex:1; }
+  .stat .n { font-size:24px; font-weight:600; }
+  .stat .l { font-size:12px; color:var(--muted); margin-top:4px; }
+  table { width:100%; border-collapse:collapse; background:#fff;
+          border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  th, td { padding:12px 14px; text-align:left; font-size:14px;
+           border-bottom:1px solid var(--border); }
+  th { background:#f8fafc; font-weight:600; color:#334155; font-size:13px; }
+  tr:last-child td { border-bottom:none; }
+  .empty { padding:40px; text-align:center; color:var(--muted); }
+  .err { color:#dc2626; padding:20px; }
+  .search { margin-bottom:16px; }
+  .search input { width:280px; padding:9px 12px; border:1px solid var(--border);
+                  border-radius:8px; font-size:13px; outline:none; }
+  .search input:focus { border-color:var(--brand); }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <h1>用户管理</h1>
+    <div class="right">
+      <span id="whoami"></span>
+      <button id="logout">退出</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="n" id="total">-</div><div class="l">总用户数</div></div>
+    </div>
+    <div class="search">
+      <input id="q" type="text" placeholder="按姓名 / 邮箱 / 电话过滤" />
+    </div>
+    <div id="tablebox"></div>
+  </div>
+
+<script>
+const token = localStorage.getItem('sb_access_token');
+if (!token) { window.location.href = '/login'; }
+
+const whoamiEl = document.getElementById('whoami');
+const totalEl = document.getElementById('total');
+const tableBox = document.getElementById('tablebox');
+const qInput = document.getElementById('q');
+
+let allUsers = [];
+
+document.getElementById('logout').addEventListener('click', () => {
+  localStorage.removeItem('sb_access_token');
+  localStorage.removeItem('sb_refresh_token');
+  localStorage.removeItem('sb_user');
+  window.location.href = '/login';
+});
+
+qInput.addEventListener('input', () => render(filter(allUsers, qInput.value)));
+
+function filter(list, q) {
+  q = (q || '').trim().toLowerCase();
+  if (!q) return list;
+  return list.filter(u =>
+    (u.name||'').toLowerCase().includes(q) ||
+    (u.email||'').toLowerCase().includes(q) ||
+    (u.phone||'').toLowerCase().includes(q)
+  );
+}
+
+function render(list) {
+  if (!list.length) {
+    tableBox.innerHTML = '<div class="empty">暂无用户数据</div>';
+    return;
+  }
+  const rows = list.map((u, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td>${escape(u.name)}</td>
+      <td>${escape(u.email)}</td>
+      <td>${escape(u.phone)}</td>
+      <td>${formatDate(u.created_at)}</td>
+    </tr>`).join('');
+  tableBox.innerHTML = `
+    <table>
+      <thead><tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>注册时间</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function escape(s) {
+  return String(s==null?'':s).replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function formatDate(s) {
+  if (!s) return '';
+  try { return new Date(s).toLocaleString('zh-CN'); }
+  catch { return s; }
+}
+
+async function load() {
+  try {
+    const me = await fetch('/api/admin/whoami', {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+    if (!me.ok) {
+      const j = await me.json().catch(() => ({}));
+      throw new Error(j.detail || '验证失败');
+    }
+    const meJson = await me.json();
+    whoamiEl.textContent = '管理员: ' + (meJson.admin?.email || '');
+
+    const r = await fetch('/api/admin/users', {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.detail || '加载失败');
+    allUsers = j.users || [];
+    totalEl.textContent = allUsers.length;
+    render(allUsers);
+  } catch (err) {
+    tableBox.innerHTML = '<div class="err">' + escape(err.message) +
+      '<br/><br/><a href="/login">重新登录</a></div>';
+  }
+}
+load();
+</script>
+</body>
+</html>
