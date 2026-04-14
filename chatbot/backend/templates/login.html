@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>登录 - Anyway Flooring</title>
+<style>
+  :root { --brand:#2563eb; --bg:#f5f7fb; --border:#dfe3ea; --err:#dc2626; --ok:#16a34a; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+         background:var(--bg); display:flex; min-height:100vh; align-items:center; justify-content:center; padding:24px; }
+  .card { background:#fff; width:100%; max-width:400px; padding:36px 32px; border-radius:14px;
+          box-shadow:0 8px 28px rgba(15,23,42,0.08); }
+  h1 { margin:0 0 4px; font-size:22px; color:#0f172a; }
+  p.sub { margin:0 0 24px; color:#64748b; font-size:14px; }
+  label { display:block; font-size:13px; color:#334155; margin:14px 0 6px; }
+  input { width:100%; padding:11px 12px; border:1px solid var(--border); border-radius:8px;
+          font-size:14px; outline:none; transition:border .15s; }
+  input:focus { border-color:var(--brand); }
+  button { margin-top:22px; width:100%; padding:12px; border:none; border-radius:8px;
+           background:var(--brand); color:#fff; font-size:15px; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:not-allowed; }
+  .msg { margin-top:14px; font-size:13px; min-height:18px; }
+  .msg.err { color:var(--err); }
+  .msg.ok  { color:var(--ok); }
+  .foot { margin-top:18px; text-align:center; font-size:13px; color:#64748b; }
+  .foot a { color:var(--brand); text-decoration:none; margin:0 6px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>登录</h1>
+    <p class="sub">使用邮箱和密码登录。</p>
+    <form id="form">
+      <label for="email">邮箱</label>
+      <input id="email" name="email" type="email" required />
+
+      <label for="password">密码</label>
+      <input id="password" name="password" type="password" required />
+
+      <button id="submit" type="submit">登录</button>
+      <div id="msg" class="msg"></div>
+    </form>
+    <div class="foot">
+      <a href="/register">注册新账号</a>·<a href="#" id="resend">重发验证邮件</a>
+    </div>
+  </div>
+
+<script>
+const form = document.getElementById('form');
+const msg = document.getElementById('msg');
+const btn = document.getElementById('submit');
+const resend = document.getElementById('resend');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.className = 'msg'; msg.textContent = '';
+  btn.disabled = true;
+  const data = Object.fromEntries(new FormData(form).entries());
+  try {
+    const r = await fetch('/api/auth/login', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(data),
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.detail || '登录失败');
+    // Store tokens locally for subsequent API calls.
+    localStorage.setItem('sb_access_token', j.access_token || '');
+    localStorage.setItem('sb_refresh_token', j.refresh_token || '');
+    localStorage.setItem('sb_user', JSON.stringify(j.user || {}));
+    msg.className = 'msg ok';
+    msg.textContent = '登录成功，正在跳转...';
+    // Redirect: admin emails go to /admin, others go to home page.
+    setTimeout(() => { window.location.href = '/'; }, 600);
+  } catch (err) {
+    msg.className = 'msg err';
+    msg.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+resend.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  if (!email) { msg.className='msg err'; msg.textContent='请先填写邮箱'; return; }
+  try {
+    const r = await fetch('/api/auth/resend', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email }),
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.detail || '重发失败');
+    msg.className = 'msg ok'; msg.textContent = j.message;
+  } catch (err) {
+    msg.className = 'msg err'; msg.textContent = err.message;
+  }
+});
+</script>
+</body>
+</html>
