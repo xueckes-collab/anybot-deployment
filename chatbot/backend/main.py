@@ -10,6 +10,8 @@ from fastapi.staticfiles import StaticFiles
 
 from config import get_settings
 from routers.chat import router as chat_router
+from routers.auth import router as auth_router            # NEW
+from routers.admin import router as admin_router          # NEW
 from services.session_manager import cleanup_expired
 
 
@@ -104,6 +106,8 @@ if _img_dir.exists():
 
 # 最后包含 API 路由
 app.include_router(chat_router)
+app.include_router(auth_router)    # NEW: /api/auth/*
+app.include_router(admin_router)   # NEW: /register, /login, /admin, /api/admin/*
 
 if __name__ == "__main__":
     import uvicorn
