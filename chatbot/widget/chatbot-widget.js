@@ -24,14 +24,31 @@
     "What certifications do your products have?",
   ];
 
+  // Shared storage keys (kept aw_ prefix for this widget's namespace)
+  const LS_TOKEN = "aw_access_token";
+  const LS_REFRESH = "aw_refresh_token";
+  const LS_USER = "aw_user";
+  const LS_SESSION = "aw_chat_session";
+  // Legacy key (email-only auth, pre v2). Read-only migration.
+  const LS_LEGACY_EMAIL = "aw_chat_email";
+
   class AnywayChat {
     constructor() {
       this.isOpen = false;
-      this.sessionId = localStorage.getItem("aw_chat_session") || null;
-      this.userEmail = localStorage.getItem("aw_chat_email") || null;
+      this.sessionId = localStorage.getItem(LS_SESSION) || null;
+      this.accessToken = localStorage.getItem(LS_TOKEN) || null;
+      this.refreshToken = localStorage.getItem(LS_REFRESH) || null;
+      try {
+        this.user = JSON.parse(localStorage.getItem(LS_USER) || "null");
+      } catch {
+        this.user = null;
+      }
       this.isStreaming = false;
+      this.authMode = "login"; // "login" | "register" | "verify-notice"
       this._createShadowDOM();
       this._bindEvents();
+      this._renderAuthUI();
+      this._refreshHeader();
     }
 
     _createShadowDOM() {
@@ -56,8 +73,9 @@
             <div class="aw-chat-header-avatar">${ICONS.bot}</div>
             <div class="aw-chat-header-info">
               <h3>Anyway Flooring Assistant</h3>
-              <p>Online — Ask me about our products</p>
+              <p class="aw-header-sub">Online — Ask me about our products</p>
             </div>
+            <button class="aw-chat-logout" type="button" title="Log out" hidden>Log out</button>
           </div>
           <div class="aw-chat-messages">
             <div class="aw-welcome">
@@ -78,12 +96,35 @@
           <div class="aw-login-screen">
             <div class="aw-login-body">
               <div class="aw-login-icon">${ICONS.bot}</div>
-              <h4>Welcome to Anyway Flooring!</h4>
-              <p>Please enter your email address to start chatting with our assistant.</p>
-              <form class="aw-login-form" novalidate>
-                <input type="email" class="aw-login-input" placeholder="your@email.com" autocomplete="email" />
+              <h4 class="aw-login-title">Welcome to Anyway Flooring!</h4>
+              <p class="aw-login-subtitle">Sign in or create an account to start chatting.</p>
+
+              <div class="aw-auth-tabs">
+                <button type="button" class="aw-auth-tab" data-tab="login">Log in</button>
+                <button type="button" class="aw-auth-tab" data-tab="register">Sign up</button>
+              </div>
+
+              <form class="aw-login-form aw-form-login" novalidate>
+                <input name="email" type="email" class="aw-login-input" placeholder="Email" autocomplete="email" required />
+                <input name="password" type="password" class="aw-login-input" placeholder="Password" autocomplete="current-password" required />
                 <p class="aw-login-error" hidden></p>
-                <button type="submit" class="aw-login-btn">Start Chatting</button>
+                <p class="aw-login-success" hidden></p>
+                <button type="submit" class="aw-login-btn">Log in</button>
+                <button type="button" class="aw-login-link aw-resend-link" hidden>Resend verification email</button>
+              </form>
+
+              <form class="aw-login-form aw-form-register" novalidate hidden>
+                <input name="name" type="text" class="aw-login-input" placeholder="Full name" autocomplete="name" required maxlength="80" />
+                <input name="email" type="email" class="aw-login-input" placeholder="Email" autocomplete="email" required />
+                <input name="phone" type="tel" class="aw-login-input" placeholder="Phone (e.g. +86 138 0000 0000)" autocomplete="tel" required />
+                <input name="password" type="password" class="aw-login-input" placeholder="Password (min 6 chars)" autocomplete="new-password" required minlength="6" />
+                <label class="aw-consent">
+                  <input type="checkbox" name="consent" required />
+                  <span>I agree to share my contact info with Anyway Flooring for follow-up.</span>
+                </label>
+                <p class="aw-login-error" hidden></p>
+                <p class="aw-login-success" hidden></p>
+                <button type="submit" class="aw-login-btn">Create account</button>
               </form>
             </div>
           </div>
@@ -96,10 +137,15 @@
       this.messages = this.shadow.querySelector(".aw-chat-messages");
       this.input = this.shadow.querySelector(".aw-chat-input");
       this.sendBtn = this.shadow.querySelector(".aw-chat-send");
+      this.logoutBtn = this.shadow.querySelector(".aw-chat-logout");
+      this.headerSub = this.shadow.querySelector(".aw-header-sub");
       this.loginScreen = this.shadow.querySelector(".aw-login-screen");
-      this.loginInput = this.shadow.querySelector(".aw-login-input");
-      this.loginError = this.shadow.querySelector(".aw-login-error");
-      this.loginForm = this.shadow.querySelector(".aw-login-form");
+      this.loginTitle = this.shadow.querySelector(".aw-login-title");
+      this.loginSubtitle = this.shadow.querySelector(".aw-login-subtitle");
+      this.authTabs = Array.from(this.shadow.querySelectorAll(".aw-auth-tab"));
+      this.loginFormEl = this.shadow.querySelector(".aw-form-login");
+      this.registerFormEl = this.shadow.querySelector(".aw-form-register");
+      this.resendLink = this.shadow.querySelector(".aw-resend-link");
     }
 
     _bindEvents() {
@@ -127,10 +173,26 @@
         });
       });
 
-      this.loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        this._handleEmailSubmit();
+      this.authTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          this.authMode = tab.dataset.tab;
+          this._renderAuthUI();
+        });
       });
+
+      this.loginFormEl.addEventListener("submit", (e) => {
+        e.preventDefault();
+        this._handleLogin();
+      });
+
+      this.registerFormEl.addEventListener("submit", (e) => {
+        e.preventDefault();
+        this._handleRegister();
+      });
+
+      this.resendLink.addEventListener("click", () => this._handleResend());
+
+      this.logoutBtn.addEventListener("click", () => this._logout());
     }
 
     _toggleChat() {
@@ -138,9 +200,10 @@
       this.panel.classList.toggle("open", this.isOpen);
       this.toggle.classList.toggle("active", this.isOpen);
       if (this.isOpen) {
-        if (!this.userEmail) {
+        if (!this.accessToken) {
           this.loginScreen.classList.add("visible");
-          setTimeout(() => this.loginInput.focus(), 300);
+          this._renderAuthUI();
+          setTimeout(() => this._focusFirstInput(), 300);
         } else {
           this.loginScreen.classList.remove("visible");
           setTimeout(() => this.input.focus(), 300);
@@ -148,17 +211,194 @@
       }
     }
 
-    _handleEmailSubmit() {
-      const email = this.loginInput.value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        this.loginError.textContent = "Please enter a valid email address.";
-        this.loginError.hidden = false;
-        return;
+    _focusFirstInput() {
+      const active = this.authMode === "register" ? this.registerFormEl : this.loginFormEl;
+      const first = active.querySelector("input");
+      if (first) first.focus();
+    }
+
+    _renderAuthUI() {
+      this.authTabs.forEach((t) => {
+        t.classList.toggle("active", t.dataset.tab === this.authMode);
+      });
+      const isRegister = this.authMode === "register";
+      this.loginFormEl.hidden = isRegister;
+      this.registerFormEl.hidden = !isRegister;
+      // Clear any stale messages
+      this._clearFormStatus(this.loginFormEl);
+      this._clearFormStatus(this.registerFormEl);
+    }
+
+    _refreshHeader() {
+      if (!this.logoutBtn) return;
+      if (this.accessToken && this.user) {
+        this.logoutBtn.hidden = false;
+        const label = this.user.name || this.user.email || "";
+        this.headerSub.textContent = label ? `Logged in · ${label}` : "Online";
+      } else {
+        this.logoutBtn.hidden = true;
+        this.headerSub.textContent = "Online — Ask me about our products";
       }
-      this.userEmail = email;
-      localStorage.setItem("aw_chat_email", email);
-      this.loginScreen.classList.remove("visible");
-      setTimeout(() => this.input.focus(), 100);
+    }
+
+    _clearFormStatus(form) {
+      const err = form.querySelector(".aw-login-error");
+      const ok = form.querySelector(".aw-login-success");
+      if (err) { err.hidden = true; err.textContent = ""; }
+      if (ok)  { ok.hidden = true; ok.textContent = ""; }
+      const resend = form.querySelector(".aw-resend-link");
+      if (resend) resend.hidden = true;
+    }
+
+    _setFormError(form, msg, opts = {}) {
+      this._clearFormStatus(form);
+      const err = form.querySelector(".aw-login-error");
+      err.textContent = msg;
+      err.hidden = false;
+      if (opts.showResend) {
+        const resend = form.querySelector(".aw-resend-link");
+        if (resend) resend.hidden = false;
+      }
+    }
+
+    _setFormSuccess(form, msg) {
+      this._clearFormStatus(form);
+      const ok = form.querySelector(".aw-login-success");
+      ok.textContent = msg;
+      ok.hidden = false;
+    }
+
+    async _apiJSON(path, body) {
+      const r = await fetch(`${API_URL}${path}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      let data = {};
+      try { data = await r.json(); } catch {}
+      return { ok: r.ok, status: r.status, data };
+    }
+
+    _applySession(data) {
+      this.accessToken = data.access_token || null;
+      this.refreshToken = data.refresh_token || null;
+      this.user = data.user || null;
+      if (this.accessToken) localStorage.setItem(LS_TOKEN, this.accessToken);
+      if (this.refreshToken) localStorage.setItem(LS_REFRESH, this.refreshToken);
+      if (this.user) localStorage.setItem(LS_USER, JSON.stringify(this.user));
+      // Clear legacy key
+      localStorage.removeItem(LS_LEGACY_EMAIL);
+      this._refreshHeader();
+    }
+
+    async _handleLogin() {
+      const form = this.loginFormEl;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const email = (data.email || "").trim();
+      const password = data.password || "";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return this._setFormError(form, "Please enter a valid email address.");
+      }
+      if (!password) {
+        return this._setFormError(form, "Please enter your password.");
+      }
+      const btn = form.querySelector(".aw-login-btn");
+      btn.disabled = true;
+      try {
+        const res = await this._apiJSON("/api/auth/login", { email, password });
+        if (!res.ok) {
+          const detail = res.data.detail || "Login failed.";
+          const needsVerify = res.status === 403 || /not confirmed|verify/i.test(detail);
+          return this._setFormError(form, detail, { showResend: needsVerify });
+        }
+        this._applySession(res.data);
+        this.loginScreen.classList.remove("visible");
+        setTimeout(() => this.input.focus(), 100);
+      } catch (err) {
+        this._setFormError(form, "Network error: " + err.message);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async _handleRegister() {
+      const form = this.registerFormEl;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const name = (data.name || "").trim();
+      const email = (data.email || "").trim();
+      const phone = (data.phone || "").trim();
+      const password = data.password || "";
+      if (!name) return this._setFormError(form, "Name is required.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return this._setFormError(form, "Please enter a valid email.");
+      }
+      if (!/^[\d+\-\s()]{5,30}$/.test(phone)) {
+        return this._setFormError(form, "Please enter a valid phone number.");
+      }
+      if (password.length < 6) {
+        return this._setFormError(form, "Password must be at least 6 characters.");
+      }
+      if (!data.consent) {
+        return this._setFormError(form, "Please agree to the terms to continue.");
+      }
+      const btn = form.querySelector(".aw-login-btn");
+      btn.disabled = true;
+      try {
+        const res = await this._apiJSON("/api/auth/register", {
+          name, email, phone, password,
+        });
+        if (!res.ok) {
+          return this._setFormError(form, res.data.detail || "Registration failed.");
+        }
+        this._setFormSuccess(
+          form,
+          "Account created. Please check your email and click the verification link, then log in."
+        );
+        // Pre-fill login form and switch tab after a moment
+        this.loginFormEl.querySelector('input[name="email"]').value = email;
+        setTimeout(() => {
+          this.authMode = "login";
+          this._renderAuthUI();
+        }, 2500);
+      } catch (err) {
+        this._setFormError(form, "Network error: " + err.message);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async _handleResend() {
+      const email = this.loginFormEl.querySelector('input[name="email"]').value.trim();
+      if (!email) {
+        return this._setFormError(this.loginFormEl, "Please enter your email first.");
+      }
+      try {
+        const res = await this._apiJSON("/api/auth/resend", { email });
+        if (!res.ok) {
+          return this._setFormError(this.loginFormEl, res.data.detail || "Resend failed.");
+        }
+        this._setFormSuccess(this.loginFormEl, res.data.message || "Verification email resent.");
+      } catch (err) {
+        this._setFormError(this.loginFormEl, "Network error: " + err.message);
+      }
+    }
+
+    _logout() {
+      this.accessToken = null;
+      this.refreshToken = null;
+      this.user = null;
+      this.sessionId = null;
+      localStorage.removeItem(LS_TOKEN);
+      localStorage.removeItem(LS_REFRESH);
+      localStorage.removeItem(LS_USER);
+      localStorage.removeItem(LS_SESSION);
+      this._refreshHeader();
+      // Reset message view
+      this.messages.innerHTML = "";
+      this.authMode = "login";
+      this.loginScreen.classList.add("visible");
+      this._renderAuthUI();
+      setTimeout(() => this._focusFirstInput(), 200);
     }
 
     _appendMessage(role, content) {
@@ -259,6 +499,14 @@
       const text = this.input.value.trim();
       if (!text || this.isStreaming) return;
 
+      // Must be logged in
+      if (!this.accessToken) {
+        this.loginScreen.classList.add("visible");
+        this._renderAuthUI();
+        setTimeout(() => this._focusFirstInput(), 200);
+        return;
+      }
+
       this.input.value = "";
       this.input.style.height = "auto";
       this.isStreaming = true;
@@ -272,6 +520,15 @@
       } catch (err) {
         console.error("Anyway Chatbot error:", err);
         this._removeTyping();
+        if (err && err.code === 401) {
+          // Token expired or invalid — force re-login
+          this._appendMessage(
+            "bot",
+            "Your session has expired. Please log in again."
+          );
+          this._logout();
+          return;
+        }
         if (!this._lastStreamHadContent) {
           this._appendMessage(
             "bot",
@@ -311,13 +568,16 @@
 
       let response;
       try {
+        const headers = { "Content-Type": "application/json" };
+        if (this.accessToken) {
+          headers["Authorization"] = "Bearer " + this.accessToken;
+        }
         response = await fetch(url, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: headers,
           body: JSON.stringify({
             message: message,
             session_id: this.sessionId,
-            user_email: this.userEmail,
           }),
           signal: controller.signal,
         });
@@ -333,6 +593,11 @@
         clearTimeout(timeout);
         let detail = "";
         try { detail = await response.text(); } catch {}
+        if (response.status === 401) {
+          const err = new Error("Unauthorized");
+          err.code = 401;
+          throw err;
+        }
         throw new Error(`HTTP ${response.status}: ${detail}`);
       }
 
@@ -616,6 +881,39 @@
     }
     .aw-login-btn:hover { opacity:.92; transform:translateY(-1px); }
     .aw-login-btn:active { transform:scale(.97); }
+    .aw-login-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+    .aw-login-success { font-size:12px; color:var(--aw-green-dark); margin:0; text-align:left; line-height:1.4; }
+    .aw-login-link {
+      background:none; border:none; color:var(--aw-green); font-size:12.5px;
+      cursor:pointer; padding:4px 0; text-decoration:underline; align-self:flex-start;
+      font-family:var(--aw-font);
+    }
+    .aw-login-link:hover { color:var(--aw-green-dark); }
+    .aw-auth-tabs {
+      display:flex; gap:6px; margin-bottom:16px; background:var(--aw-bg-secondary);
+      padding:4px; border-radius:10px;
+    }
+    .aw-auth-tab {
+      flex:1; padding:8px 0; border:none; background:transparent;
+      font-size:13px; font-weight:600; font-family:var(--aw-font);
+      color:var(--aw-text-secondary); border-radius:8px; cursor:pointer;
+      transition:background .2s ease, color .2s ease;
+    }
+    .aw-auth-tab.active { background:var(--aw-bg); color:var(--aw-green-dark); box-shadow:0 1px 3px rgba(0,0,0,.06); }
+    .aw-auth-tab:hover:not(.active) { color:var(--aw-text); }
+    .aw-consent {
+      display:flex; align-items:flex-start; gap:8px; font-size:11.5px; line-height:1.45;
+      color:var(--aw-text-secondary); text-align:left; cursor:pointer; user-select:none;
+    }
+    .aw-consent input { margin-top:2px; accent-color: var(--aw-green); }
+    .aw-chat-header { gap:10px; }
+    .aw-chat-header-info { flex:1; min-width:0; }
+    .aw-chat-logout {
+      background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.3);
+      border-radius:8px; padding:5px 10px; font-size:12px; cursor:pointer;
+      font-family:var(--aw-font); transition:background .2s ease;
+    }
+    .aw-chat-logout:hover { background:rgba(255,255,255,.28); }
     @media (max-width:480px) {
       .aw-chat-panel { bottom:0; right:0; width:100vw; height:100vh; max-height:100vh; border-radius:0; }
       .aw-chat-toggle { bottom:16px; right:16px; width:54px; height:54px; }
