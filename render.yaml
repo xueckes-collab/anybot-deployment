@@ -1,34 +1,42 @@
 services:
   # 机器人 API 服务 (Python FastAPI)
+  # 同时对外提供 /register、/login、/admin 三个页面，以及 /api/auth/*、
+  # /api/admin/*、/api/chat、/api/chat/stream 等接口。
   - type: web
     name: anybot-api
     env: python
     buildCommand: pip install -r chatbot/backend/requirements.txt
     startCommand: cd chatbot/backend && uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
+      # ── OpenAI ─────────────────────────────────────────────
       - key: OPENAI_API_KEY
         sync: false
       - key: OPENAI_BASE_URL
         value: https://api.openai.com/v1
       - key: OPENAI_MODEL
         value: gpt-4o
+
+      # ── Python / Chroma ────────────────────────────────────
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: CHROMA_PERSIST_DIR
         value: data/chroma_db
 
-  # 管理后台服务 (Node.js Express)
-  - type: web
-    name: anybot-admin
-    env: node
-    buildCommand: cd chatbot/admin/admin-backend && npm install
-    startCommand: cd chatbot/admin/admin-backend && node server.js
-    envVars:
-      - key: JWT_SECRET
+      # ── Supabase (auth + user profiles) ───────────────────
+      # Create a free project at supabase.com, copy these from
+      # Project Settings → API. SERVICE_ROLE_KEY bypasses RLS and MUST
+      # stay server-side only — never expose it to the browser.
+      - key: SUPABASE_URL
         sync: false
-      - key: ADMIN_USER
-        value: admin
-      - key: ADMIN_PASS
-        value: admin123
-      - key: NODE_VERSION
-        value: 22.13.0
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+
+      # Comma-separated admin emails. Only these accounts can open /admin
+      # and call /api/admin/*.  Example: "owner@example.com,ops@example.com"
+      - key: ADMIN_EMAILS
+        sync: false
+
+# NOTE: The legacy Node admin-backend service (anybot-admin) has been removed.
+# Admin management now lives inside anybot-api at /register, /login, /admin.
+# The chatbot/admin/admin-backend folder is kept in the repo for reference
+# but is no longer deployed.
