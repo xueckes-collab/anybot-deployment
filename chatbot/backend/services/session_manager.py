@@ -6,6 +6,7 @@ Persists to admin SQLite for management backend.
 import time
 import uuid
 from threading import Lock
+from typing import Optional
 
 _sessions: dict[str, dict] = {}
 _lock = Lock()
@@ -19,6 +20,7 @@ def create_session() -> str:
     with _lock:
         _sessions[session_id] = {
             "history": [],
+            "user": None,        # 由 widget 登录后填入(姓名 / 邮箱 / 电话)
             "created_at": time.time(),
             "last_active": time.time(),
         }
@@ -34,21 +36,49 @@ def get_history(session_id: str) -> list[dict]:
         return list(session["history"])
 
 
+def set_user_info(session_id: str, user: Optional[dict]) -> None:
+    """Attach widget-login info (name/email/phone) to a session."""
+    if not user:
+        return
+    with _lock:
+        if session_id not in _sessions:
+            _sessions[session_id] = {
+                "history": [],
+                "user": None,
+                "created_at": time.time(),
+                "last_active": time.time(),
+            }
+        _sessions[session_id]["user"] = {
+            "name": user.get("name"),
+            "email": user.get("email"),
+            "phone": user.get("phone"),
+        }
+        _sessions[session_id]["last_active"] = time.time()
+
+
+def get_user_info(session_id: str) -> Optional[dict]:
+    with _lock:
+        session = _sessions.get(session_id)
+        return dict(session["user"]) if session and session.get("user") else None
+
+
 def add_message(session_id: str, role: str, content: str):
     with _lock:
         if session_id not in _sessions:
             _sessions[session_id] = {
                 "history": [],
+                "user": None,
                 "created_at": time.time(),
                 "last_active": time.time(),
             }
         session = _sessions[session_id]
         session["history"].append({"role": role, "content": content})
         session["last_active"] = time.time()
+        user_snapshot = dict(session["user"]) if session.get("user") else None
 
     try:
         from utils.admin_persist import persist_conversation
-        persist_conversation(session_id, role, content)
+        persist_conversation(session_id, role, content, user=user_snapshot)
     except Exception:
         pass
 
