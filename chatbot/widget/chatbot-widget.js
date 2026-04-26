@@ -30,12 +30,46 @@
   // Legacy keys (full Supabase auth from older widget). Cleared if seen.
   const LEGACY_KEYS = ["aw_access_token", "aw_refresh_token", "aw_user", "aw_chat_email"];
 
+  // Country dial codes — 25 most common.  China first as default for Anyway Flooring.
+  // [code, flag, en name, zh name]
+  const COUNTRIES = [
+    ["+86", "🇨🇳", "China",          "中国"],
+    ["+1",  "🇺🇸", "USA",            "美国"],
+    ["+1",  "🇨🇦", "Canada",         "加拿大"],
+    ["+44", "🇬🇧", "UK",             "英国"],
+    ["+61", "🇦🇺", "Australia",      "澳大利亚"],
+    ["+49", "🇩🇪", "Germany",        "德国"],
+    ["+33", "🇫🇷", "France",         "法国"],
+    ["+39", "🇮🇹", "Italy",          "意大利"],
+    ["+34", "🇪🇸", "Spain",          "西班牙"],
+    ["+31", "🇳🇱", "Netherlands",    "荷兰"],
+    ["+7",  "🇷🇺", "Russia",         "俄罗斯"],
+    ["+81", "🇯🇵", "Japan",          "日本"],
+    ["+82", "🇰🇷", "Korea",          "韩国"],
+    ["+91", "🇮🇳", "India",          "印度"],
+    ["+65", "🇸🇬", "Singapore",      "新加坡"],
+    ["+60", "🇲🇾", "Malaysia",       "马来西亚"],
+    ["+66", "🇹🇭", "Thailand",       "泰国"],
+    ["+84", "🇻🇳", "Vietnam",        "越南"],
+    ["+62", "🇮🇩", "Indonesia",      "印尼"],
+    ["+63", "🇵🇭", "Philippines",    "菲律宾"],
+    ["+852","🇭🇰", "Hong Kong",      "香港"],
+    ["+886","🇹🇼", "Taiwan",         "台湾"],
+    ["+971","🇦🇪", "UAE",            "阿联酋"],
+    ["+966","🇸🇦", "Saudi Arabia",   "沙特"],
+    ["+27", "🇿🇦", "South Africa",   "南非"],
+    ["+55", "🇧🇷", "Brazil",         "巴西"],
+    ["+52", "🇲🇽", "Mexico",         "墨西哥"],
+  ];
+  const DEFAULT_DIAL = "+86";
+
   // Validation regexes (mirror chatbot-widget.html and backend lead_persist.py)
   const NAME_RE = /^[一-龥A-Za-z][一-龥A-Za-z\s.\-·']{1,29}$/;
   const EMAIL_RE = /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/;
-  const PHONE_RE = /^(?:1[3-9]\d{9}|\+\d[\d\s\-]{6,14}\d)$/;
+  // China mobile (1[3-9]\d{9}) — used when dial code is +86 and user types just 11 digits
+  const CN_MOBILE_RE = /^1[3-9]\d{9}$/;
 
-  function validateField(field, value) {
+  function validateField(field, value, opts) {
     const v = (value || "").trim();
     if (field === "name") {
       if (!v) return "请输入您的姓名 / Please enter your name";
@@ -50,9 +84,15 @@
     }
     if (field === "phone") {
       if (!v) return "请输入电话号码 / Please enter your phone";
-      const stripped = v.replace(/[\s\-]/g, "").replace(/^\+/, "");
-      if (!PHONE_RE.test(v) || stripped.length < 8) {
-        return "电话号码格式不正确 / Invalid phone (China mobile or +country code)";
+      // Local number only — strip spaces/dashes/parens, must be 5-15 digits
+      const digits = v.replace(/[\s\-()]/g, "");
+      if (!/^\d+$/.test(digits)) return "号码只能包含数字 / Phone must contain digits only";
+      if (digits.length < 5 || digits.length > 15) {
+        return "号码长度应为 5~15 位 / Phone must be 5–15 digits";
+      }
+      // Extra strict for China mobile to catch typos
+      if (opts && opts.dialCode === "+86" && !CN_MOBILE_RE.test(digits)) {
+        return "中国手机号应为 11 位且以 1[3-9] 开头 / China mobile must be 11 digits starting with 1[3-9]";
       }
       return "";
     }
@@ -136,7 +176,14 @@
                   <p class="aw-field-error"></p>
                 </div>
                 <div class="aw-field" data-field="phone">
-                  <input name="phone" type="tel" class="aw-login-input" placeholder="Phone / 电话 (e.g. 13812345678 or +86 138 1234 5678)" autocomplete="tel" />
+                  <div class="aw-phone-row">
+                    <select name="dial" class="aw-dial-select" aria-label="Country dial code">
+                      ${COUNTRIES.map(([code, flag, en, zh]) =>
+                        `<option value="${code}"${code === DEFAULT_DIAL && en === "China" ? " selected" : ""}>${flag} ${code} ${en}</option>`
+                      ).join("")}
+                    </select>
+                    <input name="phone" type="tel" class="aw-login-input aw-phone-input" placeholder="Phone / 手机号 (e.g. 13812345678)" autocomplete="tel-national" />
+                  </div>
                   <p class="aw-field-error"></p>
                 </div>
                 <button type="submit" class="aw-login-btn">Start chatting · 开始咨询</button>
@@ -157,10 +204,11 @@
       this.headerSub = this.shadow.querySelector(".aw-header-sub");
       this.loginScreen = this.shadow.querySelector(".aw-login-screen");
       this.loginForm = this.shadow.querySelector(".aw-simple-form");
+      this.dialSelect = this.shadow.querySelector(".aw-dial-select");
       this.fields = ["name", "email", "phone"].map((name) => ({
         name,
         wrap: this.shadow.querySelector(`.aw-field[data-field="${name}"]`),
-        input: this.shadow.querySelector(`.aw-field[data-field="${name}"] input`),
+        input: this.shadow.querySelector(`.aw-field[data-field="${name}"] input[name="${name}"]`),
         err: this.shadow.querySelector(`.aw-field[data-field="${name}"] .aw-field-error`),
       }));
     }
@@ -190,13 +238,22 @@
 
       // Per-field live validation: validate on blur, clear-on-fix while typing
       this.fields.forEach(({ name, wrap, input }) => {
-        input.addEventListener("blur", () => this._setFieldError(name, validateField(name, input.value)));
+        input.addEventListener("blur", () => this._setFieldError(name, validateField(name, input.value, this._validateOpts(name))));
         input.addEventListener("input", () => {
           if (wrap.classList.contains("invalid")) {
-            this._setFieldError(name, validateField(name, input.value));
+            this._setFieldError(name, validateField(name, input.value, this._validateOpts(name)));
           }
         });
       });
+      // Re-validate phone when dial code changes (so +86 strict-mode rule kicks in)
+      if (this.dialSelect) {
+        this.dialSelect.addEventListener("change", () => {
+          const phoneField = this.fields.find((f) => f.name === "phone");
+          if (phoneField && phoneField.wrap.classList.contains("invalid")) {
+            this._setFieldError("phone", validateField("phone", phoneField.input.value, this._validateOpts("phone")));
+          }
+        });
+      }
 
       this.loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -239,11 +296,18 @@
       f.wrap.classList.toggle("invalid", !!msg);
     }
 
+    _validateOpts(field) {
+      if (field === "phone") {
+        return { dialCode: this.dialSelect ? this.dialSelect.value : DEFAULT_DIAL };
+      }
+      return null;
+    }
+
     _handleLogin() {
       const data = Object.fromEntries(new FormData(this.loginForm).entries());
       let firstInvalid = null;
       this.fields.forEach((f) => {
-        const msg = validateField(f.name, data[f.name] || "");
+        const msg = validateField(f.name, data[f.name] || "", this._validateOpts(f.name));
         this._setFieldError(f.name, msg);
         if (msg && !firstInvalid) firstInvalid = f.input;
       });
@@ -252,10 +316,15 @@
         return;
       }
 
+      const dialCode = (data.dial || DEFAULT_DIAL).trim();
+      const localNum = (data.phone || "").trim().replace(/[\s\-()]/g, "");
+      // Compose final E.164-ish phone: "+86 13812345678"
+      const fullPhone = dialCode + " " + localNum;
+
       this.user = {
         name: (data.name || "").trim(),
         email: (data.email || "").trim().toLowerCase(),
-        phone: (data.phone || "").trim(),
+        phone: fullPhone,
         loginAt: new Date().toISOString(),
       };
       try {
@@ -805,8 +874,10 @@
     .aw-simple-form { gap:10px; }
     .aw-field { display:flex; flex-direction:column; gap:3px; text-align:left; }
     .aw-field input { width:100%; }
-    .aw-field.invalid input { border-color:#dc2626; }
-    .aw-field.invalid input:focus { box-shadow:0 0 0 3px rgba(220,38,38,.12); }
+    .aw-field.invalid input,
+    .aw-field.invalid .aw-dial-select { border-color:#dc2626; }
+    .aw-field.invalid input:focus,
+    .aw-field.invalid .aw-dial-select:focus { box-shadow:0 0 0 3px rgba(220,38,38,.12); }
     .aw-field-error {
       font-size:11.5px; color:#dc2626; margin:0; min-height:14px; line-height:1.3;
     }
@@ -814,6 +885,20 @@
       font-size:10.5px; color:var(--aw-text-secondary); text-align:center;
       margin:6px 0 0; line-height:1.4;
     }
+    /* Phone field: dial-code select + local number input side by side */
+    .aw-phone-row { display:flex; gap:6px; align-items:stretch; }
+    .aw-dial-select {
+      flex:0 0 auto; max-width:120px;
+      border:1.5px solid var(--aw-border); border-radius:12px;
+      padding:11px 8px; font-size:13px; font-family:var(--aw-font);
+      color:var(--aw-text); background:var(--aw-bg-secondary); outline:none;
+      cursor:pointer; transition:border-color .2s ease, box-shadow .2s ease;
+      -webkit-appearance:none; -moz-appearance:none; appearance:none;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%235f7a6b' d='M0 0l5 6 5-6z'/></svg>");
+      background-repeat:no-repeat; background-position:right 8px center; padding-right:24px;
+    }
+    .aw-dial-select:focus { border-color:var(--aw-green); box-shadow:0 0 0 3px rgba(26,135,84,.1); background-color:var(--aw-bg); }
+    .aw-phone-input { flex:1; min-width:0; }
     .aw-chat-header { gap:10px; }
     .aw-chat-header-info { flex:1; min-width:0; }
     .aw-chat-logout {

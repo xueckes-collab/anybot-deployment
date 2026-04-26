@@ -659,3 +659,26 @@
   margin: 6px 0 0;
   line-height: 1.4;
 }
+
+/* === Phone field with dial-code select === */
+.aw-field.invalid .aw-dial-select { border-color: #dc2626; }
+.aw-field.invalid .aw-dial-select:focus { box-shadow: 0 0 0 3px rgba(220, 38, 38, .12); }
+.aw-phone-row { display: flex; gap: 6px; align-items: stretch; }
+.aw-dial-select {
+  flex: 0 0 auto; max-width: 120px;
+  border: 1.5px solid var(--aw-border); border-radius: 12px;
+  padding: 11px 8px; font-size: 13px; font-family: var(--aw-font);
+  color: var(--aw-text); background: var(--aw-bg-secondary); outline: none;
+  cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease;
+  -webkit-appearance: none; -moz-appearance: none; appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%235f7a6b' d='M0 0l5 6 5-6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 24px;
+}
+.aw-dial-select:focus {
+  border-color: var(--aw-green);
+  box-shadow: 0 0 0 3px rgba(26, 135, 84, .1);
+  background-color: var(--aw-bg);
+}
+.aw-phone-input { flex: 1; min-width: 0; }

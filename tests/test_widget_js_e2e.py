@@ -197,7 +197,7 @@ def test_invalid_email_and_phone_caught(page, host_url):
     )
     _shadow_fill(page, '.aw-field[data-field="name"] input', "张三")
     _shadow_fill(page, '.aw-field[data-field="email"] input', "noatsign")
-    _shadow_fill(page, '.aw-field[data-field="phone"] input', "12812345678")  # bad: 2nd digit not 3-9
+    _shadow_fill(page, '.aw-field[data-field="phone"] input[name="phone"]', "12812345678")  # bad: 2nd digit not 3-9
     page.evaluate(
         "() => document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-simple-form').requestSubmit()"
     )
@@ -214,7 +214,7 @@ def test_valid_submit_shows_personalized_welcome(page, host_url):
     )
     _shadow_fill(page, '.aw-field[data-field="name"] input', "张三")
     _shadow_fill(page, '.aw-field[data-field="email"] input', "z@s.com")
-    _shadow_fill(page, '.aw-field[data-field="phone"] input', "13812345678")
+    _shadow_fill(page, '.aw-field[data-field="phone"] input[name="phone"]', "13812345678")
     page.evaluate(
         "() => document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-simple-form').requestSubmit()"
     )
@@ -229,7 +229,7 @@ def test_valid_submit_shows_personalized_welcome(page, host_url):
     raw = page.evaluate("sessionStorage.getItem('aw_user_info')")
     assert raw
     saved = json.loads(raw)
-    assert saved["name"] == "张三" and saved["email"] == "z@s.com" and saved["phone"] == "13812345678"
+    assert saved["name"] == "张三" and saved["email"] == "z@s.com" and saved["phone"] == "+86 13812345678"
 
 
 def test_send_message_includes_user_in_body_and_headers(page, host_url):
@@ -240,7 +240,7 @@ def test_send_message_includes_user_in_body_and_headers(page, host_url):
     )
     _shadow_fill(page, '.aw-field[data-field="name"] input', "李四")
     _shadow_fill(page, '.aw-field[data-field="email"] input', "li@si.com")
-    _shadow_fill(page, '.aw-field[data-field="phone"] input', "13900001234")
+    _shadow_fill(page, '.aw-field[data-field="phone"] input[name="phone"]', "13900001234")
     page.evaluate(
         "() => document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-simple-form').requestSubmit()"
     )
@@ -261,10 +261,11 @@ def test_send_message_includes_user_in_body_and_headers(page, host_url):
     assert len(captured["requests"]) == 1
     req = captured["requests"][0]
     assert req["body"]["message"] == "你好"
-    assert req["body"]["user"] == {"name": "李四", "email": "li@si.com", "phone": "13900001234"}
+    # Phone is now stored as "<dialCode> <localNumber>" — default dial code is +86
+    assert req["body"]["user"] == {"name": "李四", "email": "li@si.com", "phone": "+86 13900001234"}
     h = req["headers"]
     assert h.get("x-user-email") == "li@si.com"
-    assert h.get("x-user-phone") == "13900001234"
+    assert h.get("x-user-phone") == "+86 13900001234"
     from urllib.parse import unquote
     assert unquote(h.get("x-user-name", "")) == "李四"
     # No Authorization header (no bearer token)
@@ -279,7 +280,7 @@ def test_logout_clears_session_and_returns_to_login(page, host_url):
     )
     _shadow_fill(page, '.aw-field[data-field="name"] input', "张三")
     _shadow_fill(page, '.aw-field[data-field="email"] input', "z@s.com")
-    _shadow_fill(page, '.aw-field[data-field="phone"] input', "13812345678")
+    _shadow_fill(page, '.aw-field[data-field="phone"] input[name="phone"]', "13812345678")
     page.evaluate(
         "() => document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-simple-form').requestSubmit()"
     )
@@ -293,6 +294,95 @@ def test_logout_clears_session_and_returns_to_login(page, host_url):
     )
     raw = page.evaluate("sessionStorage.getItem('aw_user_info')")
     assert raw is None
+
+
+def test_dial_code_select_present_with_china_default(page, host_url):
+    _open_widget(page, host_url)
+    _shadow_click(page, ".aw-chat-toggle")
+    page.wait_for_function(
+        "document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-login-screen').classList.contains('visible')"
+    )
+    # Dial select should exist
+    selected = page.evaluate(
+        "() => document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-dial-select').value"
+    )
+    assert selected == "+86", f"default dial code should be +86, got {selected!r}"
+    # Should have many country options
+    n_options = page.evaluate(
+        "() => document.getElementById('anyway-chatbot').shadowRoot.querySelectorAll('.aw-dial-select option').length"
+    )
+    assert n_options >= 20, f"should have at least 20 country options, got {n_options}"
+
+
+def test_dial_code_us_then_local_number(page, host_url):
+    """Switch to +1 USA, type a local US number, verify final phone is '+1 4155551234'."""
+    captured = _open_widget(page, host_url)
+    _shadow_click(page, ".aw-chat-toggle")
+    page.wait_for_function(
+        "document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-login-screen').classList.contains('visible')"
+    )
+    _shadow_fill(page, '.aw-field[data-field="name"] input[name="name"]', "John Smith")
+    _shadow_fill(page, '.aw-field[data-field="email"] input[name="email"]', "john@example.com")
+    # Select +1 (first US entry)
+    page.evaluate(
+        """() => {
+            const sel = document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-dial-select');
+            sel.value = '+1';
+            sel.dispatchEvent(new Event('change', {bubbles:true}));
+        }"""
+    )
+    _shadow_fill(page, '.aw-field[data-field="phone"] input[name="phone"]', "4155551234")
+    page.evaluate(
+        "() => document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-simple-form').requestSubmit()"
+    )
+    page.wait_for_function(
+        "!document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-login-screen').classList.contains('visible')"
+    )
+    raw = page.evaluate("sessionStorage.getItem('aw_user_info')")
+    saved = json.loads(raw)
+    assert saved["phone"] == "+1 4155551234", f"unexpected phone: {saved['phone']!r}"
+
+    # Send a message and verify backend gets the combined phone
+    _shadow_fill(page, ".aw-chat-input", "hi from US")
+    _shadow_click(page, ".aw-chat-send")
+    page.wait_for_function(
+        "[...document.getElementById('anyway-chatbot').shadowRoot.querySelectorAll('.aw-msg-bot')].some(b => b.textContent.includes('Hello'))",
+        timeout=10000,
+    )
+    assert captured["requests"][-1]["body"]["user"]["phone"] == "+1 4155551234"
+
+
+def test_dial_code_china_strict_validation(page, host_url):
+    """When dial code is +86, phone must be 11 digits 1[3-9]xx — short numbers rejected."""
+    _open_widget(page, host_url)
+    _shadow_click(page, ".aw-chat-toggle")
+    page.wait_for_function(
+        "document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-login-screen').classList.contains('visible')"
+    )
+    _shadow_fill(page, '.aw-field[data-field="name"] input[name="name"]', "张三")
+    _shadow_fill(page, '.aw-field[data-field="email"] input[name="email"]', "z@s.com")
+    # +86 is the default; type a non-Chinese-mobile local number — should be rejected
+    _shadow_fill(page, '.aw-field[data-field="phone"] input[name="phone"]', "12812345678")
+    page.evaluate(
+        "() => document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-simple-form').requestSubmit()"
+    )
+    cls = _shadow_class(page, '.aw-field[data-field="phone"]')
+    assert cls and "invalid" in cls
+
+    # Switch to +1 USA — same number should now be accepted (5-15 digits)
+    page.evaluate(
+        """() => {
+            const sel = document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-dial-select');
+            sel.value = '+1';
+            sel.dispatchEvent(new Event('change', {bubbles:true}));
+        }"""
+    )
+    page.evaluate(
+        "() => document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-simple-form').requestSubmit()"
+    )
+    page.wait_for_function(
+        "!document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-login-screen').classList.contains('visible')"
+    )
 
 
 def test_existing_session_skips_login(page, host_url):
