@@ -80,17 +80,17 @@ def backend_url():
 
 @pytest.fixture(scope="module")
 def host_url(backend_url):
-    """Serve a page embedding the widget, with apiUrl pointing at the backend."""
+    """Serve a page embedding the widget, with apiUrl pointing at the backend.
+
+    The widget supports a ``window.ANYBOT_API_URL`` global override.  We set
+    it via an inline script BEFORE the widget script runs.
+    """
     widget_html = (REPO / "chatbot-widget.html").read_text(encoding="utf-8")
-    patched = re.sub(
-        r"apiUrl: 'http://localhost:8000'",
-        f"apiUrl: '{backend_url}'",
-        widget_html,
-        count=1,
-    )
     page_html = (
-        "<!doctype html><html><head><meta charset='utf-8'></head><body>"
-        + patched
+        "<!doctype html><html><head><meta charset='utf-8'>"
+        f"<script>window.ANYBOT_API_URL = {backend_url!r};</script>"
+        "</head><body>"
+        + widget_html
         + "</body></html>"
     ).encode("utf-8")
 

@@ -10,7 +10,12 @@ v2:登录后才能聊天(姓名 / 邮箱 / 电话,均带前端校验)
 (function() {
   // ==================== 配置 ====================
   const CONFIG = {
-    apiUrl: 'http://localhost:8000',           // 改为你的后端地址
+    // 默认指向 Render 上的 anybot-api 服务。
+    // 想改成别的地址?在加载本 widget 之前,先用一段内联脚本设
+    //   window.ANYBOT_API_URL = 'https://your-backend.example.com';
+    // 即可覆盖默认值。
+    apiUrl: (typeof window !== 'undefined' && window.ANYBOT_API_URL)
+            || 'https://anybot-api.onrender.com',
     title: '🤖 ANYWAY FLOOR 助手',
     placeholder: '请输入你的问题...',
     welcomeMessage: '欢迎！我是 ANYWAY FLOOR 的智能助手,有什么可以帮你的吗?',
