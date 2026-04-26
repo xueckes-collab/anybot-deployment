@@ -132,6 +132,48 @@ def test_widget_validation_blocks_bad_input(page, widget_url):
     expect(page.locator("#chatbot-chat")).to_be_hidden()
 
 
+def _can_reach_prod() -> bool:
+    """Some sandboxed CI environments block egress to *.onrender.com.
+    Probe before running tests that depend on a live LLM round-trip."""
+    import urllib.request, urllib.error
+    try:
+        urllib.request.urlopen(PROD_API + "/api/health", timeout=5).read()
+        return True
+    except (urllib.error.URLError, OSError, TimeoutError):
+        return False
+
+
+@pytest.mark.skipif(not _can_reach_prod(), reason="Sandbox egress blocks anybot-api.onrender.com")
+def test_widget_gets_real_llm_reply_from_production(page, widget_url):
+    """Production end-to-end: widget asks a question, real DeepSeek answers,
+    streamed tokens get displayed in the chat panel.
+
+    Skipped automatically when the test environment can't reach prod
+    (e.g. sandbox network egress is restricted)."""
+    page.goto(widget_url, wait_until="load")
+    page.fill("#chatbot-login-name", "测试用户")
+    page.fill("#chatbot-login-email", "test@example.com")
+    page.fill("#chatbot-login-phone", "13800000000")
+    page.locator("#chatbot-login-submit").click()
+    expect(page.locator("#chatbot-chat")).to_be_visible()
+
+    page.fill("#chatbot-input", "Tell me about SPC flooring in one short sentence.")
+    page.locator("#chatbot-send-btn").click()
+
+    page.wait_for_function(
+        """() => {
+            const msgs = document.querySelectorAll('.chatbot-message.assistant .chatbot-message-content');
+            if (msgs.length < 2) return false;
+            const reply = msgs[1].textContent || '';
+            return reply.length > 20 && !reply.includes('抱歉');
+        }""",
+        timeout=30000,
+    )
+    reply = page.locator(".chatbot-message.assistant .chatbot-message-content").nth(1).text_content()
+    assert reply and len(reply) > 20
+    assert "抱歉" not in reply and "Chat error" not in reply
+
+
 def test_widget_send_includes_user_in_request(page, widget_url):
     """When the widget sends a message to prod, the user info should be in the body."""
     captured_requests = []
