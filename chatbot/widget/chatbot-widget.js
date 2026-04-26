@@ -15,6 +15,10 @@
     send: '<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>',
     bot: '<svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1.07A7.001 7.001 0 0 1 7.07 19H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h-1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2zM9 14a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>',
     floor: '<svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>',
+    user: '<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
+    mail: '<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+    lock: '<svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>',
   };
 
   const QUICK_QUESTIONS = [
@@ -168,11 +172,17 @@
 
               <form class="aw-login-form aw-simple-form" novalidate>
                 <div class="aw-field" data-field="name">
-                  <input name="name" type="text" class="aw-login-input" placeholder="Name / 姓名" autocomplete="name" maxlength="80" />
+                  <div class="aw-input-wrap">
+                    <span class="aw-input-icon">${ICONS.user}</span>
+                    <input name="name" type="text" class="aw-login-input aw-has-icon" placeholder="Name / 姓名" autocomplete="name" maxlength="80" />
+                  </div>
                   <p class="aw-field-error"></p>
                 </div>
                 <div class="aw-field" data-field="email">
-                  <input name="email" type="email" class="aw-login-input" placeholder="Email / 邮箱" autocomplete="email" />
+                  <div class="aw-input-wrap">
+                    <span class="aw-input-icon">${ICONS.mail}</span>
+                    <input name="email" type="email" class="aw-login-input aw-has-icon" placeholder="Email / 邮箱" autocomplete="email" />
+                  </div>
                   <p class="aw-field-error"></p>
                 </div>
                 <div class="aw-field" data-field="phone">
@@ -186,8 +196,14 @@
                   </div>
                   <p class="aw-field-error"></p>
                 </div>
-                <button type="submit" class="aw-login-btn">Start chatting · 开始咨询</button>
-                <p class="aw-login-foot">By submitting you agree we may use this info to follow up.<br/>提交即视为同意我们使用此信息回访。</p>
+                <button type="submit" class="aw-login-btn">
+                  <span>Start chatting · 开始咨询</span>
+                  <span class="aw-btn-arrow">${ICONS.arrow}</span>
+                </button>
+                <p class="aw-login-foot">
+                  <span class="aw-foot-icon">${ICONS.lock}</span>
+                  <span>By submitting you agree we may use this info to follow up.<br/>提交即视为同意我们使用此信息回访。</span>
+                </p>
               </form>
             </div>
           </div>
@@ -870,9 +886,14 @@
       color:var(--aw-text-secondary); text-align:left; cursor:pointer; user-select:none;
     }
     .aw-consent input { margin-top:2px; accent-color: var(--aw-green); }
-    /* --- Simple 3-field login (no password / no Supabase) --- */
-    .aw-simple-form { gap:10px; }
-    .aw-field { display:flex; flex-direction:column; gap:3px; text-align:left; }
+    /* --- Simple 3-field login (polished, no password / no Supabase) --- */
+    .aw-simple-form { gap:14px; }
+    .aw-field { display:flex; flex-direction:column; gap:4px; text-align:left;
+      opacity:0; transform:translateY(8px); animation:aw-field-in .45s ease-out forwards; }
+    .aw-field:nth-of-type(1) { animation-delay:.05s; }
+    .aw-field:nth-of-type(2) { animation-delay:.12s; }
+    .aw-field:nth-of-type(3) { animation-delay:.19s; }
+    @keyframes aw-field-in { to { opacity:1; transform:translateY(0); } }
     .aw-field input { width:100%; }
     .aw-field.invalid input,
     .aw-field.invalid .aw-dial-select { border-color:#dc2626; }
@@ -881,10 +902,51 @@
     .aw-field-error {
       font-size:11.5px; color:#dc2626; margin:0; min-height:14px; line-height:1.3;
     }
-    .aw-login-foot {
-      font-size:10.5px; color:var(--aw-text-secondary); text-align:center;
-      margin:6px 0 0; line-height:1.4;
+    /* Input with leading icon */
+    .aw-input-wrap { position:relative; }
+    .aw-input-icon {
+      position:absolute; left:14px; top:50%; transform:translateY(-50%);
+      width:16px; height:16px; color:#9ca3af; pointer-events:none;
+      display:flex; align-items:center; justify-content:center;
+      transition:color .2s ease;
     }
+    .aw-input-icon svg { width:16px; height:16px; fill:currentColor; }
+    .aw-has-icon { padding-left:38px; }
+    .aw-input-wrap:focus-within .aw-input-icon { color:var(--aw-green); }
+    .aw-field.invalid .aw-input-icon { color:#dc2626; }
+    /* Login button enhancements */
+    .aw-login-btn {
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      margin-top:4px;
+      opacity:0; transform:translateY(8px);
+      animation:aw-field-in .45s ease-out .26s forwards;
+    }
+    .aw-login-btn .aw-btn-arrow {
+      display:inline-flex; width:16px; height:16px; transition:transform .2s ease;
+    }
+    .aw-login-btn .aw-btn-arrow svg { width:16px; height:16px; stroke:currentColor; fill:none; }
+    .aw-login-btn:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(26,135,84,.45); }
+    .aw-login-btn:hover .aw-btn-arrow { transform:translateX(3px); }
+    /* Footer with security icon */
+    .aw-login-foot {
+      display:flex; align-items:flex-start; justify-content:center; gap:6px;
+      font-size:10.5px; color:var(--aw-text-secondary); text-align:center;
+      margin:8px 0 0; line-height:1.45;
+      opacity:0; animation:aw-field-in .45s ease-out .33s forwards;
+    }
+    .aw-foot-icon {
+      flex:0 0 auto; width:11px; height:11px; margin-top:2px;
+      color:#9ca3af; display:inline-flex; align-items:center;
+    }
+    .aw-foot-icon svg { width:11px; height:11px; fill:currentColor; }
+    /* Welcome icon glow ring + gentle float */
+    .aw-login-icon { position:relative; animation:aw-float 4s ease-in-out infinite; }
+    .aw-login-icon::before {
+      content:""; position:absolute; inset:-12px; border-radius:50%;
+      background:radial-gradient(circle, rgba(26,135,84,.25) 0%, transparent 65%);
+      z-index:-1; pointer-events:none;
+    }
+    @keyframes aw-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
     /* Phone field: dial-code select + local number input side by side */
     .aw-phone-row { display:flex; gap:6px; align-items:stretch; }
     .aw-dial-select {

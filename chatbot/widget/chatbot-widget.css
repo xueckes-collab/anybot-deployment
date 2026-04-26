@@ -682,3 +682,69 @@
   background-color: var(--aw-bg);
 }
 .aw-phone-input { flex: 1; min-width: 0; }
+
+/* === Polished login: icon-prefixed inputs, button arrow, stagger anim, glow icon, security footer === */
+.aw-simple-form { gap: 14px; }
+.aw-field {
+  opacity: 0; transform: translateY(8px);
+  animation: aw-field-in .45s ease-out forwards;
+  gap: 4px;
+}
+.aw-field:nth-of-type(1) { animation-delay: .05s; }
+.aw-field:nth-of-type(2) { animation-delay: .12s; }
+.aw-field:nth-of-type(3) { animation-delay: .19s; }
+@keyframes aw-field-in { to { opacity: 1; transform: translateY(0); } }
+
+.aw-input-wrap { position: relative; }
+.aw-input-icon {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; color: #9ca3af; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: color .2s ease;
+}
+.aw-input-icon svg { width: 16px; height: 16px; fill: currentColor; }
+.aw-has-icon { padding-left: 38px; }
+.aw-input-wrap:focus-within .aw-input-icon { color: var(--aw-green); }
+.aw-field.invalid .aw-input-icon { color: #dc2626; }
+
+.aw-login-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 4px;
+  opacity: 0; transform: translateY(8px);
+  animation: aw-field-in .45s ease-out .26s forwards;
+}
+.aw-login-btn .aw-btn-arrow {
+  display: inline-flex; width: 16px; height: 16px;
+  transition: transform .2s ease;
+}
+.aw-login-btn .aw-btn-arrow svg {
+  width: 16px; height: 16px; stroke: currentColor; fill: none;
+}
+.aw-login-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(26, 135, 84, .45); }
+.aw-login-btn:hover .aw-btn-arrow { transform: translateX(3px); }
+
+.aw-login-foot {
+  display: flex; align-items: flex-start; justify-content: center; gap: 6px;
+  font-size: 10.5px; color: var(--aw-text-secondary); text-align: center;
+  margin: 8px 0 0; line-height: 1.45;
+  opacity: 0; animation: aw-field-in .45s ease-out .33s forwards;
+}
+.aw-foot-icon {
+  flex: 0 0 auto; width: 11px; height: 11px; margin-top: 2px;
+  color: #9ca3af; display: inline-flex; align-items: center;
+}
+.aw-foot-icon svg { width: 11px; height: 11px; fill: currentColor; }
+
+.aw-login-icon {
+  position: relative;
+  animation: aw-float 4s ease-in-out infinite;
+}
+.aw-login-icon::before {
+  content: ""; position: absolute; inset: -12px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(26, 135, 84, .25) 0%, transparent 65%);
+  z-index: -1; pointer-events: none;
+}
+@keyframes aw-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
