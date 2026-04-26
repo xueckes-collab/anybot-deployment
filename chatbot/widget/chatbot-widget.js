@@ -28,6 +28,14 @@
     "What certifications do your products have?",
   ];
 
+  // Bot identity
+  const BOT_NAME = "Ways";
+
+  // Auto-open settings: open the chat panel automatically once per browser
+  // session (so visitors don't have to find the bubble first).
+  const AUTO_OPEN_DELAY_MS = 2500;        // wait 2.5s after page load before popping open
+  const SS_AUTO_OPENED = "aw_auto_opened"; // session flag — set after first auto-open
+
   // sessionStorage keys (lightweight — no Supabase, no tokens)
   const SS_USER = "aw_user_info";          // 姓名/邮箱/电话
   const LS_SESSION = "aw_chat_session";    // chat session_id (still localStorage to survive page reload during conversation)
@@ -117,9 +125,32 @@
         this.user = null;
       }
       this.isStreaming = false;
+      this._autoOpenTimer = null;
       this._createShadowDOM();
       this._bindEvents();
       this._refreshHeader();
+      this._scheduleAutoOpen();
+    }
+
+    _scheduleAutoOpen() {
+      // Pop the panel open automatically once per browser session.
+      // If the user already opened/closed it in this tab, skip.
+      try {
+        if (sessionStorage.getItem(SS_AUTO_OPENED)) return;
+      } catch (_) { return; }
+      this._autoOpenTimer = setTimeout(() => {
+        this._autoOpenTimer = null;
+        try { sessionStorage.setItem(SS_AUTO_OPENED, "1"); } catch (_) {}
+        if (!this.isOpen) this._toggleChat();
+      }, AUTO_OPEN_DELAY_MS);
+    }
+
+    _cancelAutoOpen() {
+      if (this._autoOpenTimer) {
+        clearTimeout(this._autoOpenTimer);
+        this._autoOpenTimer = null;
+      }
+      try { sessionStorage.setItem(SS_AUTO_OPENED, "1"); } catch (_) {}
     }
 
     _createShadowDOM() {
@@ -143,16 +174,16 @@
           <div class="aw-chat-header">
             <div class="aw-chat-header-avatar">${ICONS.bot}</div>
             <div class="aw-chat-header-info">
-              <h3>Anyway Flooring Assistant</h3>
-              <p class="aw-header-sub">Online — Ask me about our products</p>
+              <h3>${BOT_NAME} · Anyway Flooring</h3>
+              <p class="aw-header-sub">Online — Ask me anything! ✨</p>
             </div>
             <button class="aw-chat-logout" type="button" title="Log out" hidden>Log out</button>
           </div>
           <div class="aw-chat-messages">
             <div class="aw-welcome">
               <div class="aw-welcome-icon">${ICONS.floor}</div>
-              <h4>Welcome to Anyway Flooring!</h4>
-              <p>I can help you find the perfect flooring solution. Ask me anything about our products.</p>
+              <h4>Hi, I'm ${BOT_NAME}! 👋</h4>
+              <p>Your flooring sidekick. Ask me anything about our products!<br/>我是 ${BOT_NAME},地板小助手 🌟</p>
               <div class="aw-quick-btns">
                 ${QUICK_QUESTIONS.map(
                   (q) => `<button class="aw-quick-btn">${q}</button>`
@@ -167,8 +198,8 @@
           <div class="aw-login-screen">
             <div class="aw-login-body">
               <div class="aw-login-icon">${ICONS.bot}</div>
-              <h4 class="aw-login-title">Welcome to Anyway Flooring!</h4>
-              <p class="aw-login-subtitle">Please leave your contact info to start chatting.<br/>留下联系方式即可开始咨询。</p>
+              <h4 class="aw-login-title">Hey there! 👋 I'm ${BOT_NAME}</h4>
+              <p class="aw-login-subtitle">Tell me a bit about you and let's chat about flooring!<br/>留个联系方式,马上一起聊起来 ✨</p>
 
               <form class="aw-login-form aw-simple-form" novalidate>
                 <div class="aw-field" data-field="name">
@@ -230,7 +261,11 @@
     }
 
     _bindEvents() {
-      this.toggle.addEventListener("click", () => this._toggleChat());
+      this.toggle.addEventListener("click", () => {
+        // User manually opened/closed → don't auto-pop again this session
+        this._cancelAutoOpen();
+        this._toggleChat();
+      });
       this.sendBtn.addEventListener("click", () => this._sendMessage());
 
       this.input.addEventListener("keydown", (e) => {
@@ -360,10 +395,13 @@
       // Re-render welcome bubble with quick-reply buttons (rebound below)
       const div = document.createElement("div");
       div.className = "aw-welcome";
+      const greeting = this.user && this.user.name
+        ? `Hey, ${this.user.name}! 👋`
+        : `Hi, I'm ${BOT_NAME}! 👋`;
       div.innerHTML = `
         <div class="aw-welcome-icon">${ICONS.floor}</div>
-        <h4>Welcome${this.user && this.user.name ? ", " + this.user.name : ""}!</h4>
-        <p>I can help you find the perfect flooring solution. Ask me anything about our products.</p>
+        <h4>${greeting}</h4>
+        <p>Your flooring sidekick. Ask me anything about our products!<br/>地板小助手在此 🌟</p>
         <div class="aw-quick-btns">
           ${QUICK_QUESTIONS.map((q) => `<button class="aw-quick-btn">${q}</button>`).join("")}
         </div>`;

@@ -385,6 +385,81 @@ def test_dial_code_china_strict_validation(page, host_url):
     )
 
 
+def test_widget_auto_opens_on_first_visit_and_introduces_ways(page, host_url):
+    """First-visit visitor: panel should auto-pop after ~2.5s, with Ways introduction."""
+    _open_widget(page, host_url)
+    # Make sure no auto-open flag yet
+    page.evaluate("sessionStorage.removeItem('aw_auto_opened')")
+    page.reload(wait_until="load")
+    page.wait_for_function("document.getElementById('anyway-chatbot') && document.getElementById('anyway-chatbot').shadowRoot")
+
+    # Right after load — panel should NOT yet be open
+    open_now = page.evaluate(
+        "document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-chat-panel').classList.contains('open')"
+    )
+    assert not open_now, "panel should not auto-open immediately"
+
+    # Within ~3s the panel should pop open by itself
+    page.wait_for_function(
+        "document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-chat-panel').classList.contains('open')",
+        timeout=4000,
+    )
+
+    # Login screen should be visible (no user yet) and introduce Ways
+    title_text = _shadow_text(page, ".aw-login-title")
+    assert title_text and "Ways" in title_text, f"login title should mention Ways, got: {title_text!r}"
+    assert "👋" in title_text, f"login title should be playful (have emoji), got: {title_text!r}"
+
+    # Auto-open flag should now be set
+    flag = page.evaluate("sessionStorage.getItem('aw_auto_opened')")
+    assert flag == "1"
+
+
+def test_widget_does_not_auto_open_again_in_same_session(page, host_url):
+    """If the auto-open flag is already set (user saw it once), don't pop again."""
+    _open_widget(page, host_url)
+    # Pre-seed the flag and reload
+    page.evaluate("sessionStorage.setItem('aw_auto_opened', '1')")
+    page.reload(wait_until="load")
+    page.wait_for_function("document.getElementById('anyway-chatbot') && document.getElementById('anyway-chatbot').shadowRoot")
+
+    # Wait longer than the auto-open delay
+    page.wait_for_timeout(3000)
+
+    open_now = page.evaluate(
+        "document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-chat-panel').classList.contains('open')"
+    )
+    assert not open_now, "panel should NOT auto-open when flag is already set"
+
+
+def test_widget_manual_click_cancels_pending_auto_open(page, host_url):
+    """If user clicks the bubble manually before the 2.5s timer fires, that's the
+    one-and-only open for this session — flag set, no double-pop later."""
+    _open_widget(page, host_url)
+    page.evaluate("sessionStorage.removeItem('aw_auto_opened')")
+    page.reload(wait_until="load")
+    page.wait_for_function("document.getElementById('anyway-chatbot') && document.getElementById('anyway-chatbot').shadowRoot")
+
+    # Click the bubble immediately (before auto-open timer fires)
+    _shadow_click(page, ".aw-chat-toggle")
+    page.wait_for_function(
+        "document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-chat-panel').classList.contains('open')"
+    )
+
+    # Flag should be set
+    assert page.evaluate("sessionStorage.getItem('aw_auto_opened')") == "1"
+
+    # User closes it
+    _shadow_click(page, ".aw-chat-toggle")
+    page.wait_for_timeout(3500)  # past auto-open delay
+
+    # Should NOT have re-opened
+    open_now = page.evaluate(
+        "document.getElementById('anyway-chatbot').shadowRoot.querySelector('.aw-chat-panel').classList.contains('open')"
+    )
+    assert not open_now, "panel should not re-open after user already saw + closed it"
+
+
 def test_existing_session_skips_login(page, host_url):
     _open_widget(page, host_url)
     # Pre-seed sessionStorage and reload
